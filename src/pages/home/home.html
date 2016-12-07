@@ -1,14 +1,28 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-segment [(ngModel)]="homeSegment">
+      <ion-segment-button value="events">
+        Events
+      </ion-segment-button>
+      <ion-segment-button value="media">
+        Media
+      </ion-segment-button>
+    </ion-segment>
   </ion-navbar>
 </ion-header>
-
 <ion-content class="home">
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <h2 [innerHTML]="item.title.rendered"></h2>
-      <p [innerHTML]="item.excerpt.rendered"></p>
+  <div [ngSwitch]="homeSegment">
+    <ion-list *ngSwitchCase="'events'" class="card-background-page">
+<ion-card  *ngFor="let churchEvent of churchEvents">
+    <img src={{churchEvent.better_featured_image.source_url}}>
+    <div class="card-title" [innerHTML]="churchEvent.title.rendered"></div>
+  </ion-card>
+    </ion-list>
+    <ion-list *ngSwitchCase="'media'">
+      <button ion-item *ngFor="let post of latestPosts" (click)="itemTapped($event, post)">
+      <h2 [innerHTML]="post.title.rendered"></h2>
+      <p [innerHTML]="post.excerpt.rendered"></p>
     </button>
-  </ion-list>
+    </ion-list>
+  </div>
 </ion-content>
