@@ -17,7 +17,23 @@ export class HomeService {
             .then(res => res.json());            
     }
     getLatestPosts() {
-       return this.http.get(`${this.baseurl}posts/`)
+       return this.http.get(`${this.baseurl}posts/?filter[category_name]=talks`)
+            .toPromise()
+            .then(res => res.json());            
+    }
+    getVideoCategory() {
+       return this.http.get(`${this.baseurl}categories/?parent=37`)
+            .toPromise()
+            .then(res => res.json());            
+    }
+      getTalksCategory() {
+       return this.http.get(`${this.baseurl}categories/?parent=2`)
+            .toPromise()
+            .then(res => res.json());            
+    }
+      getVideosByCategory(categoryId:number) {
+        console.log(categoryId);
+       return this.http.get(`${this.baseurl}posts/?categories=${categoryId}`)
             .toPromise()
             .then(res => res.json());            
     }

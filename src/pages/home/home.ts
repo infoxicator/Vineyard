@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {HomeService} from './home.service'
-import {PostDetailPage} from '../post-detail/post-detail'
+import {TalksPage} from '../talks/talks'
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NavController, NavParams } from 'ionic-angular';
@@ -22,9 +22,9 @@ export class HomePage {
       this.homeService.getLatestPosts()
        .then(latestPosts => this.latestPosts = latestPosts);
    }
-    itemTapped(event, post){
-    this.navCtrl.push(PostDetailPage, {
-      post: post
+    itemTapped(event, talk){
+    this.navCtrl.push(TalksPage, {
+      talk: talk
     })
   }
 }
