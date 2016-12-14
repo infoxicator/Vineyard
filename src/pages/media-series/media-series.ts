@@ -24,9 +24,9 @@ export class MediaSeriesPage {
        this.homeService.getTalksCategory()
       .then(talksCategories => this.talksCategories = talksCategories);
   }
-   categoryTapped(event, categoryId){
+   categoryTapped(event, category){
     this.navCtrl.push(MediaCategoryPage, {
-      categoryId: categoryId
+      category: category
     })
   }
 

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>MediaCategory</ion-title>
+    <ion-title>{{category.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,7 +16,9 @@
 <ion-content padding>
  <ion-list class="card-background-page">
      <ion-card ion-item *ngFor="let video of videos">
+       <div *ngIf="video.better_featured_image">
         <img src={{video.better_featured_image.source_url}}>
+       </div>
     <div class="card-title" [innerHTML]="video.title.rendered"></div>
       </ion-card>
     </ion-list>

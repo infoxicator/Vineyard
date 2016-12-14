@@ -6,30 +6,26 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>MediaSeries</ion-title>
+    <ion-title>Media Series</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-segment [(ngModel)]="seriesSegment">
-    <ion-segment-button value="videos">
-      Videos
-    </ion-segment-button>
-    <ion-segment-button value="talks">
-      Series
-    </ion-segment-button>
-  </ion-segment>
-  <div [ngSwitch]="seriesSegment">
-    <ion-list *ngSwitchCase="'videos'" class="card-background-page">
-     <ion-card ion-item *ngFor="let videoCategory of videoCategories" (click)="categoryTapped($event, videoCategory.id)">
+  <h2>Videos</h2>
+   <ion-scroll scrollX="true" style="height: 250px;">
+     <ion-row>
+     <ion-col width-50 *ngFor="let videoCategory of videoCategories" (click)="categoryTapped($event, videoCategory)">
         <img src={{videoCategory.img}}>
         <div class="card-title" [innerHTML]="videoCategory.name"></div>
-      </ion-card>
-    </ion-list>
-    <ion-list *ngSwitchCase="'talks'" class="card-background-page">
-      <ion-card ion-item *ngFor="let talkCategory of talksCategories">
+      </ion-col>
+    </ion-row>
+   </ion-scroll>
+    <h2>Series</h2>
+   <ion-scroll scrollX="true" style="height: 400px;">
+     <ion-row>
+     <ion-col width-50 *ngFor="let talkCategory of talksCategories" (click)="categoryTapped($event, videoCategory)">
         <img src={{talkCategory.img}}>
         <div class="card-title" [innerHTML]="talkCategory.name"></div>
-      </ion-card>
-    </ion-list>
-  </div>
+    </ion-col>
+    </ion-row>
+   </ion-scroll>
 </ion-content>

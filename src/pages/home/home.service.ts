@@ -32,7 +32,6 @@ export class HomeService {
             .then(res => res.json());            
     }
       getVideosByCategory(categoryId:number) {
-        console.log(categoryId);
        return this.http.get(`${this.baseurl}posts/?categories=${categoryId}`)
             .toPromise()
             .then(res => res.json());            

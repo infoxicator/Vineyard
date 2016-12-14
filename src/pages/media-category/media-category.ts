@@ -14,12 +14,12 @@ import {HomeService} from '../home/home.service'
   templateUrl: 'media-category.html'
 })
 export class MediaCategoryPage {
-  categoryId: number;
+  category: any;
   videos = [];
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private homeService:HomeService) {
-      this.categoryId = navParams.get('categoryId');
-      this.homeService.getVideosByCategory(this.categoryId)
+      this.category = navParams.get('category');
+      this.homeService.getVideosByCategory(this.category.id)
       .then(videos => this.videos = videos)
       .then(next => console.log(this.videos));
   }
