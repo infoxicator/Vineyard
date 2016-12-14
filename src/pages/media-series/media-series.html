@@ -22,7 +22,7 @@
     <h2>Series</h2>
    <ion-scroll scrollX="true" style="height: 400px;">
      <ion-row>
-     <ion-col width-50 *ngFor="let talkCategory of talksCategories" (click)="categoryTapped($event, videoCategory)">
+     <ion-col width-50 *ngFor="let talkCategory of talksCategories" (click)="categoryTapped($event, talkCategory)">
         <img src={{talkCategory.img}}>
         <div class="card-title" [innerHTML]="talkCategory.name"></div>
     </ion-col>

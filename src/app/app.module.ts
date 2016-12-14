@@ -1,6 +1,9 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+//External libraries
+import { Ng2MapModule} from 'ng2-map';
+//Pages Imports
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -23,7 +26,7 @@ import { MediaCategoryPage } from '../pages/media-category/media-category';
     MediaCategoryPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp), Ng2MapModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
