@@ -3,6 +3,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 //External libraries
 import { Ng2MapModule} from 'ng2-map';
+import { ElasticHeader } from '../components/elastic-header/elastic-header';
 //Pages Imports
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -23,7 +24,8 @@ import { MediaCategoryPage } from '../pages/media-category/media-category';
     PostDetailPage,
     TalksPage,
     MediaSeriesPage,
-    MediaCategoryPage
+    MediaCategoryPage,
+    ElasticHeader
   ],
   imports: [
     IonicModule.forRoot(MyApp), Ng2MapModule
