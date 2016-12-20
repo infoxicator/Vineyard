@@ -27,5 +27,23 @@ page-home {
   }
 
 }
+.item ion-thumbnail {
+  position: relative; 
+    min-width: 18rem;    
+    min-height: 10rem;
+    img {
+        max-width: 20rem;    
+        min-width: 10rem;
+        max-height: 10rem;
+    }
+}
+ion-thumbnail span {
+    position: absolute;
+    padding: 5px 10px 1px 10px;
+    right: 2px;
+    bottom: 0px;
+    color:white;
+    background-color: rgba(0, 0, 0, 0.5);;
+}
 
 }

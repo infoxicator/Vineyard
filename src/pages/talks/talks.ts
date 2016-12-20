@@ -15,6 +15,7 @@ export class TalksPage {
  talk: any;
   constructor(public navCtrl: NavController,  private navParams: NavParams) {
       this.talk = navParams.get('talk');
+      console.log(this.talk);
   }
 
   ionViewDidLoad() {

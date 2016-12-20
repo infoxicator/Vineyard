@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 //External libraries
 import { Ng2MapModule} from 'ng2-map';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
+import {MomentModule} from 'angular2-moment';
 //Pages Imports
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -13,6 +14,7 @@ import {PostDetailPage} from '../pages/post-detail/post-detail'
 import {TalksPage} from '../pages/talks/talks'
 import { MediaSeriesPage } from '../pages/media-series/media-series';
 import { MediaCategoryPage } from '../pages/media-category/media-category';
+import { EventDetailPage } from '../pages/event-detail/event-detail';
 
 @NgModule({
   declarations: [
@@ -25,11 +27,12 @@ import { MediaCategoryPage } from '../pages/media-category/media-category';
     TalksPage,
     MediaSeriesPage,
     MediaCategoryPage,
+    EventDetailPage,
     ElasticHeader
   ],
   imports: [
-    IonicModule.forRoot(MyApp), Ng2MapModule
-  ],
+    IonicModule.forRoot(MyApp), Ng2MapModule, MomentModule
+],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -40,6 +43,7 @@ import { MediaCategoryPage } from '../pages/media-category/media-category';
     PostDetailPage,
     TalksPage,
     MediaSeriesPage,
+    EventDetailPage,
     MediaCategoryPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]

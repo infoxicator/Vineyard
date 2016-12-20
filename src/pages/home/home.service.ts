@@ -9,6 +9,8 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class HomeService {
   private  baseurl: string = 'http://www.brightonvineyard.com/wp-json/wp/v2/';
+  private  vimeourl: string = 'https://api.vimeo.com/';
+  private vimeotoken: string = '3060da4d95d5aecaf208fef91db3460c';
   events: any;
     constructor(private http:Http){}
     getChurchEvents() {
@@ -17,7 +19,7 @@ export class HomeService {
             .then(res => res.json());            
     }
     getLatestPosts() {
-       return this.http.get(`${this.baseurl}posts/?filter[category_name]=talks`)
+       return this.http.get(`${this.vimeourl}channels/brightonvineyard/videos?access_token=${this.vimeotoken}`)
             .toPromise()
             .then(res => res.json());            
     }

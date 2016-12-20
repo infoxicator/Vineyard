@@ -13,16 +13,22 @@
 <ion-content class="home">
   <div [ngSwitch]="homeSegment">
     <ion-list *ngSwitchCase="'events'" class="card-background-page">
-<ion-card  *ngFor="let churchEvent of churchEvents">
+<ion-card  *ngFor="let churchEvent of churchEvents" (click)="eventTapped($event, churchEvent)">
     <img src={{churchEvent.better_featured_image.source_url}}>
     <div class="card-title" [innerHTML]="churchEvent.title.rendered"></div>
   </ion-card>
     </ion-list>
     <ion-list *ngSwitchCase="'media'">
-      <button ion-item *ngFor="let post of latestPosts" (click)="itemTapped($event, post)">
-      <h2 [innerHTML]="post.title.rendered"></h2>
-      <p [innerHTML]="post.excerpt.rendered"></p>
-    </button>
+    <ion-item *ngFor="let video of latestPosts">
+         <ion-thumbnail item-left>
+      <img src={{video.pictures.sizes[2].link_with_play_button}}>
+      <span>{{ video.duration | amDuration:'seconds'}}</span>
+    </ion-thumbnail>   
+      <h2 [innerHTML]="video.name"></h2>
+      <p [innerHTML]="video.description"></p>
+      <p>{{video.release_time | amTimeAgo}} - {{video.stats.plays}} plays</p>
+      <button ion-button clear item-right><ion-icon name="more"></ion-icon></button>
+    </ion-item>
     </ion-list>
   </div>
 </ion-content>
