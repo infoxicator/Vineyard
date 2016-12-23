@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { SecToMinPipe } from './sectomin.pipe';
 //External libraries
 import { Ng2MapModule} from 'ng2-map';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
@@ -28,7 +29,8 @@ import { EventDetailPage } from '../pages/event-detail/event-detail';
     MediaSeriesPage,
     MediaCategoryPage,
     EventDetailPage,
-    ElasticHeader
+    ElasticHeader,
+    SecToMinPipe
   ],
   imports: [
     IonicModule.forRoot(MyApp), Ng2MapModule, MomentModule

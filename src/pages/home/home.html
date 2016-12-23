@@ -22,7 +22,7 @@
     <ion-item *ngFor="let video of latestPosts">
          <ion-thumbnail item-left>
       <img src={{video.pictures.sizes[2].link_with_play_button}}>
-      <span>{{ video.duration | amDuration:'seconds'}}</span>
+      <span>{{ video.duration | SecToMin}}</span>
     </ion-thumbnail>   
       <h2 [innerHTML]="video.name"></h2>
       <p [innerHTML]="video.description"></p>

@@ -10,21 +10,28 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <h2>Videos</h2>
+  <h2>PlayLists</h2>
    <ion-scroll scrollX="true" style="height: 250px;">
      <ion-row>
-     <ion-col width-50 *ngFor="let videoCategory of videoCategories" (click)="categoryTapped($event, videoCategory)">
-        <img src={{videoCategory.img}}>
-        <div class="card-title" [innerHTML]="videoCategory.name"></div>
+     <ion-col width-75 *ngFor="let album of videoAlbums" (click)="categoryTapped($event, album)">
+           <div *ngIf="album.pictures && album.pictures.sizes" class="thumbnail-wrapper">
+           <img src={{album.pictures.sizes[2].link}}>
+           <div class="overlay"></div> </div>          
+        <div class="card-title">{{album.name}} 
+       {{album.metadata.connections.videos.total}} Videos / {{ album.duration | SecToMin}}
+          </div> 
       </ion-col>
     </ion-row>
    </ion-scroll>
-    <h2>Series</h2>
+    <h2>Channels</h2>
    <ion-scroll scrollX="true" style="height: 400px;">
      <ion-row>
-     <ion-col width-50 *ngFor="let talkCategory of talksCategories" (click)="categoryTapped($event, talkCategory)">
-        <img src={{talkCategory.img}}>
-        <div class="card-title" [innerHTML]="talkCategory.name"></div>
+     <ion-col width-75 *ngFor="let channel of videoChannels" (click)="categoryTapped($event, channel)">
+        <div *ngIf="channel.pictures && channel.pictures.sizes" class="thumbnail-wrapper">
+           <img src={{channel.pictures.sizes[2].link}}>
+           <div class="overlay"></div>
+           </div>   
+        <div class="card-title">{{channel.name}}</div>
     </ion-col>
     </ion-row>
    </ion-scroll>

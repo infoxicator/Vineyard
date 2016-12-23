@@ -23,15 +23,15 @@ export class HomeService {
             .toPromise()
             .then(res => res.json());            
     }
-    getVideoCategory() {
-       return this.http.get(`${this.baseurl}categories/?parent=37`)
+    getVideoAlbums() {
+        return this.http.get(`${this.vimeourl}users/brightonvineyard/albums?access_token=${this.vimeotoken}`)
             .toPromise()
-            .then(res => res.json());            
+            .then(res => res.json());             
     }
-      getTalksCategory() {
-       return this.http.get(`${this.baseurl}categories/?parent=2`)
+      getVideoChannels() {
+       return this.http.get(`${this.vimeourl}users/brightonvineyard/channels?access_token=${this.vimeotoken}`)
             .toPromise()
-            .then(res => res.json());            
+            .then(res => res.json());                  
     }
       getVideosByCategory(categoryId:number) {
        return this.http.get(`${this.baseurl}posts/?categories=${categoryId}`)

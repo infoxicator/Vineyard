@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import { NavController, NavParams } from 'ionic-angular';
 
 
+
 @Component({
   selector: 'page-home',
   providers: [HomeService],

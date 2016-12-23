@@ -15,14 +15,14 @@ import {MediaCategoryPage} from '../media-category/media-category'
   templateUrl: 'media-series.html'
 })
 export class MediaSeriesPage {
-  videoCategories = [];
-  talksCategories = [];
+  videoAlbums = [];
+  videoChannels = [];
   seriesSegment = 'videos';
   constructor(public navCtrl: NavController, private homeService:HomeService) {
-      this.homeService.getVideoCategory()
-      .then(videoCategories => this.videoCategories = videoCategories);
-       this.homeService.getTalksCategory()
-      .then(talksCategories => this.talksCategories = talksCategories);
+      this.homeService.getVideoAlbums()
+      .then(videoAlbums => this.videoAlbums = videoAlbums.data);
+       this.homeService.getVideoChannels()
+      .then(videoChannels => this.videoChannels = videoChannels.data);
   }
    categoryTapped(event, category){
     this.navCtrl.push(MediaCategoryPage, {
