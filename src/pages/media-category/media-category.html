@@ -16,10 +16,13 @@
 <ion-content padding>
  <ion-list class="card-background-page">
      <ion-card ion-item *ngFor="let video of videos">
-       <div *ngIf="video.better_featured_image">
-        <img src={{video.better_featured_image.source_url}}>
+       <div *ngIf="video.pictures">
+        <img src={{video.pictures.sizes[2].link_with_play_button}}>
+    <div class="card-title">{{video.name}}</div>
        </div>
-    <div class="card-title" [innerHTML]="video.title.rendered"></div>
       </ion-card>
     </ion-list>
+     <ion-infinite-scroll (ionInfinite)="loadMoreVideos($event)" *ngIf="nextPageUri">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>

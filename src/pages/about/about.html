@@ -6,27 +6,21 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content elastic-header>
-  <ion-slides>
-  <ion-slide>
-    <h1>Slide 1</h1>
-  </ion-slide>
-  <ion-slide>
-    <h1>Slide 2</h1>
-  </ion-slide>
-  <ion-slide>
-    <h1>Slide 3</h1>
-  </ion-slide>
-</ion-slides>
+<ion-content>
+  
   <!-- <div class="background-image"></div>-->
 <div class="main-content">
- 
-        <h2>Parallax Header</h2>
- 
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
- 
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
- 
+  <ion-grid>
+    <ion-row *ngFor="let row of grid  let first = first; let last = last"
+    [ngClass]="{ first: first, last: last }">
+  <ion-col *ngFor="let page of row" (click)="pageTapped($event, page)">
+    <div *ngIf="page && page.better_featured_image && page.better_featured_image.source_url">
+           <img src={{page.better_featured_image.source_url}}>
+    </div>
+    </ion-col>
+</ion-row>
+  </ion-grid>
+     
   </div>
  
 </ion-content>

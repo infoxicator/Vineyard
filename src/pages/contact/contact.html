@@ -6,7 +6,13 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content elastic-header>
+  <ion-slides *ngIf="loaded" [options]="sliderOptions">
+  <ion-slide *ngFor="let key of arrayOfKeys">
+    <h1>{{slider[key].title}}</h1>
+    <img [src]="slider[key].url" class="slide-image" />
+  </ion-slide>
+</ion-slides>
   <ion-list>
     <ion-item>
       <ion-icon name="logo-twitter" item-left></ion-icon>
@@ -21,7 +27,7 @@
       Visit our Website
     </ion-item>
   </ion-list>
-   <ng2-map zoom="15" center="50.8341173, -0.1513398">
+   <ng2-map zoom="15" center="50.8341173, -0.1513398" draggable="false">
           <marker position="50.8341173, -0.1513398"></marker>
       </ng2-map>
 </ion-content>

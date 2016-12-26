@@ -24,17 +24,32 @@ export class HomeService {
             .then(res => res.json());            
     }
     getVideoAlbums() {
-        return this.http.get(`${this.vimeourl}users/brightonvineyard/albums?access_token=${this.vimeotoken}`)
+        return this.http.get(`${this.vimeourl}users/brightonvineyard/albums?access_token=${this.vimeotoken}&sort=date&direction=desc`)
             .toPromise()
             .then(res => res.json());             
     }
       getVideoChannels() {
-       return this.http.get(`${this.vimeourl}users/brightonvineyard/channels?access_token=${this.vimeotoken}`)
+       return this.http.get(`${this.vimeourl}users/brightonvineyard/channels?access_token=${this.vimeotoken}&sort=date&direction=asc`)
             .toPromise()
             .then(res => res.json());                  
     }
-      getVideosByCategory(categoryId:number) {
-       return this.http.get(`${this.baseurl}posts/?categories=${categoryId}`)
+      getVideosByCategory(categoryUri:string) {
+       return this.http.get(`${this.vimeourl}${categoryUri}/videos?access_token=${this.vimeotoken}&page=1`)
+            .toPromise()
+            .then(res => res.json());            
+    }
+      getMoreVideos(nextURI:string) {
+       return this.http.get(`${this.vimeourl}/channels${nextURI}`)
+            .toPromise()
+            .then(res => res.json());            
+    }
+    getPage(pageId:number) {
+       return this.http.get(`${this.baseurl}pages/${pageId}`)
+            .toPromise()
+            .then(res => res.json());            
+    }
+    getPagesByParent(parentId:number) {
+       return this.http.get(`${this.baseurl}pages/?parent=${parentId}`)
             .toPromise()
             .then(res => res.json());            
     }

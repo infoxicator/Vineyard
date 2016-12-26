@@ -16,6 +16,7 @@ import {TalksPage} from '../pages/talks/talks'
 import { MediaSeriesPage } from '../pages/media-series/media-series';
 import { MediaCategoryPage } from '../pages/media-category/media-category';
 import { EventDetailPage } from '../pages/event-detail/event-detail';
+import {ChurchPage} from '../pages/church/church'
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { EventDetailPage } from '../pages/event-detail/event-detail';
     MediaSeriesPage,
     MediaCategoryPage,
     EventDetailPage,
+    ChurchPage,
     ElasticHeader,
     SecToMinPipe
   ],
@@ -46,7 +48,8 @@ import { EventDetailPage } from '../pages/event-detail/event-detail';
     TalksPage,
     MediaSeriesPage,
     EventDetailPage,
-    MediaCategoryPage
+    MediaCategoryPage,
+    ChurchPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
