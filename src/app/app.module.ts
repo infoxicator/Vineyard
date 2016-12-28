@@ -3,7 +3,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { SecToMinPipe } from './sectomin.pipe';
 //External libraries
-import { Ng2MapModule} from 'ng2-map';
+//import { Ng2MapModule} from 'ng2-map';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
 import {MomentModule} from 'angular2-moment';
 //Pages Imports
@@ -35,7 +35,7 @@ import {ChurchPage} from '../pages/church/church'
     SecToMinPipe
   ],
   imports: [
-    IonicModule.forRoot(MyApp), Ng2MapModule, MomentModule
+    IonicModule.forRoot(MyApp), MomentModule //Ng2MapModule, 
 ],
   bootstrap: [IonicApp],
   entryComponents: [

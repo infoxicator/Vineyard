@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import {HomeService} from './home.service'
 import {TalksPage} from '../talks/talks'
 import {EventDetailPage} from '../event-detail/event-detail'
-import {Http} from '@angular/http';
+//import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 
 
