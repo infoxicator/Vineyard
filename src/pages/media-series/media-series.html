@@ -11,27 +11,33 @@
 </ion-header>
 <ion-content padding>
   <h2>PlayLists</h2>
-   <ion-scroll scrollX="true" style="height: 250px;">
+   <ion-scroll scrollX="true">
      <ion-row>
-     <ion-col width-75 *ngFor="let album of videoAlbums" (click)="categoryTapped($event, album)">
-           <div *ngIf="album.pictures && album.pictures.sizes" class="thumbnail-wrapper">
-           <img src={{album.pictures.sizes[2].link}}>
-           <div class="overlay"></div> </div>          
-        <div class="card-title">{{album.name}} 
-       {{album.metadata.connections.videos.total}} Videos / {{ album.duration | SecToMin}}
-          </div> 
+     <ion-col width-90 *ngFor="let album of videoAlbums" (click)="categoryTapped($event, album)">
+           <div *ngIf="album.pictures && album.pictures.sizes" class="thumbnail-wrapper" [ngStyle]="{'background': 'url('+album.pictures.sizes[2].link+')'}">
+                <div class="overlay">
+                    <div class="overlay_thumbnail_meta">
+                      <span class="banner">{{album.name}}</span>
+                      <span class="meta">{{album.metadata.connections.videos.total}} Videos / {{ album.duration | SecToMin}}</span>
+                    </div> 
+                </div>
+           </div>           
+           
       </ion-col>
     </ion-row>
    </ion-scroll>
     <h2>Channels</h2>
-   <ion-scroll scrollX="true" style="height: 400px;">
+   <ion-scroll scrollX="true">
      <ion-row>
-     <ion-col width-75 *ngFor="let channel of videoChannels" (click)="categoryTapped($event, channel)">
-        <div *ngIf="channel.pictures && channel.pictures.sizes" class="thumbnail-wrapper">
-           <img src={{channel.pictures.sizes[2].link}}>
-           <div class="overlay"></div>
-           </div>   
-        <div class="card-title">{{channel.name}}</div>
+     <ion-col width-90 *ngFor="let channel of videoChannels" (click)="categoryTapped($event, channel)">
+        <div *ngIf="channel.pictures && channel.pictures.sizes" class="thumbnail-wrapper" [ngStyle]="{'background': 'url('+channel.pictures.sizes[2].link+')'}">
+           <div class="overlay">
+              <div class="overlay_thumbnail_meta">
+                <span class="banner">{{channel.name}}</span>
+              </div>
+           </div>
+        </div>   
+       
     </ion-col>
     </ion-row>
    </ion-scroll>

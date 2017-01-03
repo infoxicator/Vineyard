@@ -8,11 +8,17 @@ export class SecToMinPipe implements PipeTransform{
         let formatedString:string;
         let tempTime: any;
         let showHours: string = '';
+        let showSeconds:  string = '';
          tempTime = moment.duration(value, 'seconds');
         if(tempTime.hours()>0){
             showHours = tempTime.hours().toString() + ':';
         }
-        formatedString = showHours + tempTime.minutes().toString() +':' + tempTime.seconds().toString();
+        if(tempTime.seconds() < 10){
+            showSeconds = '0' + tempTime.seconds().toString();
+        }else{
+            showSeconds = tempTime.seconds().toString()
+        }
+        formatedString = showHours + tempTime.minutes().toString() +':' + showSeconds;
         return formatedString;         
     }
 

@@ -10,21 +10,24 @@
     </ion-segment>
   </ion-navbar>
 </ion-header>
-<ion-content class="home">
+<ion-content class="card-background-page">
   <div [ngSwitch]="homeSegment">
-    <ion-list *ngSwitchCase="'events'" class="card-background-page">
-<ion-card  *ngFor="let churchEvent of churchEvents" (click)="eventTapped($event, churchEvent)">
-    <img src={{churchEvent.better_featured_image.source_url}}>
-    <div class="card-title" [innerHTML]="churchEvent.title.rendered"></div>
+    <ion-list *ngSwitchCase="'events'">
+<ion-card  *ngFor="let churchEvent of churchEvents" class="thumbnail-wrapper" (click)="eventTapped($event, churchEvent)"  [ngStyle]="{'background': 'url('+churchEvent.better_featured_image.source_url+')'}">
+    <!--<img src={{churchEvent.better_featured_image.source_url}}>-->
+                    <div class="overlay_thumbnail_meta">
+                      <span [innerHTML]="churchEvent.title.rendered"></span>
+                      <!--<span class="meta">{{album.metadata.connections.videos.total}} Videos / {{ album.duration | SecToMin}}</span>-->
+                    </div> 
   </ion-card>
     </ion-list>
     <ion-list *ngSwitchCase="'media'">
     <ion-item *ngFor="let video of latestPosts">
          <ion-thumbnail item-left>
-      <img src={{video.pictures.sizes[2].link_with_play_button}}>
+      <img src={{video.pictures.sizes[1].link_with_play_button}}>
       <span>{{ video.duration | SecToMin}}</span>
     </ion-thumbnail>   
-      <h2 [innerHTML]="video.name"></h2>
+      <h5 [innerHTML]="video.name"></h5>
       <p [innerHTML]="video.description"></p>
       <p>{{video.release_time | amTimeAgo}} - {{video.stats.plays}} plays</p>
       <button ion-button clear item-right><ion-icon name="more"></ion-icon></button>

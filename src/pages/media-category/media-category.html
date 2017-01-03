@@ -9,20 +9,25 @@
   <ion-navbar>
     <ion-title>{{category.name}}</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
-<ion-content padding>
- <ion-list class="card-background-page">
-     <ion-card ion-item *ngFor="let video of videos">
-       <div *ngIf="video.pictures">
-        <img src={{video.pictures.sizes[2].link_with_play_button}}>
-    <div class="card-title">{{video.name}}</div>
-       </div>
-      </ion-card>
-    </ion-list>
-     <ion-infinite-scroll (ionInfinite)="loadMoreVideos($event)" *ngIf="nextPageUri">
-   <ion-infinite-scroll-content></ion-infinite-scroll-content>
- </ion-infinite-scroll>
+<ion-content>
+  <ion-list class="card-background-page">
+    <ion-card ion-item *ngFor="let video of videos">
+            <ion-item>
+              <ion-avatar item-left>
+                <img src="{{video.user.pictures.sizes[2].link}}">
+              </ion-avatar>
+                <h4>{{video.name}}</h4>
+            <p>{{video.release_time | amTimeAgo}} - {{video.stats.plays}} plays</p>
+               <button ion-button clear item-right><ion-icon name="more"></ion-icon></button>
+        </ion-item>
+        <div class="video-picture" *ngIf="video.pictures">
+          <img src={{video.pictures.sizes[3].link}}>
+           <span>{{ video.duration | SecToMin}}</span>
+        </div>
+    </ion-card>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadMoreVideos($event)" *ngIf="nextPageUri">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
