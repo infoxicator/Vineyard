@@ -12,9 +12,8 @@
 
 </ion-header>
 
-
-<ion-content padding>
-        <br> 
-        <p [innerHTML]="churchPage.content.rendered" align="justify">
-
+<ion-content elastic-header>
+<div class="background-image" [ngStyle]="{'background-image': 'url('+churchPage.better_featured_image.source_url+')'}"></div>
+<div class="main-content" padding [innerHTML]="churchPage.content.rendered" align="justify"> 
+</div>
 </ion-content>

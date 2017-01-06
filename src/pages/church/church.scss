@@ -1,3 +1,25 @@
 page-church {
-
+    .x-promo-image-wrap{
+    width: 200px;
+    height: 200px;
+    margin: 25px auto;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+    }
+    .wpcf7{
+        display:none !important;
+    }
+    .background-image 
+     {       
+        background-size: cover;
+        background-position: center;
+        height: 45vw;
+    }
+ 
+    .main-content {
+        padding: 20px;
+        background-color: white;
+        position: absolute;
+    }
 }

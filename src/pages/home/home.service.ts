@@ -49,7 +49,7 @@ export class HomeService {
             .then(res => res.json());            
     }
     getPagesByParent(parentId:number) {
-       return this.http.get(`${this.baseurl}pages/?parent=${parentId}`)
+       return this.http.get(`${this.baseurl}pages/?filter[orderby]=menu_order&order=asc&parent=${parentId}`)
             .toPromise()
             .then(res => res.json());            
     }

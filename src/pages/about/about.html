@@ -12,7 +12,7 @@
 <div class="main-content">
   <ion-grid>
     <ion-row *ngFor="let row of grid  let first = first; let last = last"
-    [ngClass]="{ first: first, last: last }">
+    [ngClass]="{ first: first, last: last }" style="min-height: 25vh;">
   <ion-col *ngFor="let page of row" (click)="pageTapped($event, page)">
     <div *ngIf="page && page.better_featured_image && page.better_featured_image.source_url">
            <img src={{page.better_featured_image.source_url}}>
