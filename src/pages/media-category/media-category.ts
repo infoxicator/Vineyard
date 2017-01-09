@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams} from 'ionic-angular';
 import {HomeService} from '../home/home.service'
+import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';  
 
 /*
   Generated class for the MediaCategory page.
@@ -19,11 +20,15 @@ export class MediaCategoryPage {
   nextPageUri: any;
   loaded = false;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private homeService:HomeService) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private homeService:HomeService, sanitizer: DomSanitizer) {
       this.category = navParams.get('category');
       this.homeService.getVideosByCategory(this.category.uri)
       .then(videos => {this.videos = videos.data;
+        this.videos.forEach(video => {
+          video.embed.html = sanitizer.bypassSecurityTrustHtml(video.embed.html);
+        });
       this.nextPageUri = videos.paging.next;  
+      console.log(this.videos);
       });
   }
    loadMoreVideos(infiniteScroll) {

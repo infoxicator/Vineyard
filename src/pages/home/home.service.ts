@@ -12,16 +12,19 @@ export class HomeService {
   private  vimeourl: string = 'https://api.vimeo.com/';
   private vimeotoken: string = '3060da4d95d5aecaf208fef91db3460c';
   events: any;
-    constructor(private http:Http){}
+    constructor(private http:Http){
+    }
     getChurchEvents() {
-       return this.http.get(`${this.baseurl}posts/?filter[category_name]=events`)
-            .toPromise()
-            .then(res => res.json());            
+        let url = `${this.baseurl}posts/?filter[category_name]=events`;
+        let request = this.http.get(url).map(res => res.json());
+       return request;
+
     }
     getLatestPosts() {
-       return this.http.get(`${this.vimeourl}channels/brightonvineyard/videos?access_token=${this.vimeotoken}`)
-            .toPromise()
-            .then(res => res.json());            
+        let url = `${this.vimeourl}channels/brightonvineyard/videos?access_token=${this.vimeotoken}`
+        let cacheKey = url;
+        let request = this.http.get(url).map(res => res.json());
+         return request;       
     }
     getVideoAlbums() {
         return this.http.get(`${this.vimeourl}users/brightonvineyard/albums?access_token=${this.vimeotoken}&sort=date&direction=desc`)

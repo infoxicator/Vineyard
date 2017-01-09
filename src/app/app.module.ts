@@ -2,10 +2,12 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { SecToMinPipe } from './sectomin.pipe';
+import { ConnectivityService } from '../providers/connectivity-service';
 //External libraries
 //import { Ng2MapModule} from 'ng2-map';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
 import {MomentModule} from 'angular2-moment';
+import { LazyImgComponent } from '../global/components/';
 //Pages Imports
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -32,10 +34,24 @@ import {ChurchPage} from '../pages/church/church'
     EventDetailPage,
     ChurchPage,
     ElasticHeader,
+    LazyImgComponent,
     SecToMinPipe
   ],
   imports: [
-    IonicModule.forRoot(MyApp), MomentModule //Ng2MapModule, 
+    IonicModule.forRoot(MyApp, {
+tabsPlacement: 'bottom',
+  platforms: {
+    android: {
+      tabsPlacement: 'top'
+    },
+    ios: {
+      tabsPlacement: 'bottom'
+    },
+    windows:
+    {
+      tabsPlacement: 'top'
+    }
+    }}), MomentModule//, Ng2MapModule
 ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,8 +65,9 @@ import {ChurchPage} from '../pages/church/church'
     MediaSeriesPage,
     EventDetailPage,
     MediaCategoryPage,
-    ChurchPage
+    ChurchPage,
+    LazyImgComponent
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ConnectivityService]
 })
 export class AppModule {}

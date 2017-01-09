@@ -7,7 +7,6 @@
 </ion-header>
 
 <ion-content>
-  
   <!-- <div class="background-image"></div>-->
 <div class="main-content">
   <ion-grid>
@@ -15,7 +14,7 @@
     [ngClass]="{ first: first, last: last }" style="min-height: 25vh;">
   <ion-col *ngFor="let page of row" (click)="pageTapped($event, page)">
     <div *ngIf="page && page.better_featured_image && page.better_featured_image.source_url">
-           <img src={{page.better_featured_image.source_url}}>
+           <lazy-img src={{page.better_featured_image.source_url}}></lazy-img>
     </div>
     </ion-col>
 </ion-row>

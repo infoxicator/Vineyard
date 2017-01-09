@@ -5,6 +5,7 @@ import {EventDetailPage} from '../event-detail/event-detail'
 //import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NavController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 
 
@@ -14,17 +15,21 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
+   public loader = this.loadingCtrl.create( {duration: 60000});
   churchEvents= []
   latestPosts= []
   nextDay: Date;
   homeSegment = 'events';
-   constructor(public navCtrl: NavController, private homeService:HomeService) {
+   constructor(public navCtrl: NavController, private homeService:HomeService,
+   public loadingCtrl: LoadingController) {
+      //this.loader.present();
      this.nextDay = new Date();
       this.homeService.getChurchEvents()
-      .then(churchEvents => this.churchEvents = churchEvents)
-      .then(log => console.log(this.churchEvents));
+      .subscribe(churchEvents => this.churchEvents = churchEvents)
+       // this.loader.dismiss()
+     // });
       this.homeService.getLatestPosts()
-       .then(latestPosts => this.latestPosts = latestPosts.data).then(log => console.log(this.latestPosts));
+       .subscribe(latestPosts => this.latestPosts = latestPosts.data);
    }
     itemTapped(event, talk){
     this.navCtrl.push(TalksPage, {

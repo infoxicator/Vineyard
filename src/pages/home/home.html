@@ -13,8 +13,11 @@
 <ion-content class="card-background-page">
   <div [ngSwitch]="homeSegment">
     <ion-list *ngSwitchCase="'events'">
-<ion-card  *ngFor="let churchEvent of churchEvents" class="thumbnail-wrapper" (click)="eventTapped($event, churchEvent)"  [ngStyle]="{'background': 'url('+churchEvent.better_featured_image.source_url+')'}">
-    <!--<img src={{churchEvent.better_featured_image.source_url}}>-->
+      
+<ion-card  *ngFor="let churchEvent of churchEvents" class="thumbnail-wrapper" (click)="eventTapped($event, churchEvent)"  >
+  <!--[ngStyle]="{'background': 'url('+churchEvent.better_featured_image.source_url+')'}"> -->
+ 
+    <lazy-img src={{churchEvent.better_featured_image.source_url}}></lazy-img>
                     <div class="overlay_thumbnail_meta">
                       <span [innerHTML]="churchEvent.title.rendered"></span>
                       <!--<span class="meta">{{album.metadata.connections.videos.total}} Videos / {{ album.duration | SecToMin}}</span>-->
@@ -24,7 +27,7 @@
     <ion-list *ngSwitchCase="'media'">
     <ion-item *ngFor="let video of latestPosts">
          <ion-thumbnail item-left>
-      <img src={{video.pictures.sizes[1].link_with_play_button}}>
+       <lazy-img src={{video.pictures.sizes[1].link_with_play_button}}></lazy-img>
       <span>{{ video.duration | SecToMin}}</span>
     </ion-thumbnail>   
       <h5 [innerHTML]="video.name"></h5>

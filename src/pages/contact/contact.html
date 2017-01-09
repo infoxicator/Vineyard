@@ -6,28 +6,39 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content elastic-header>
+<ion-content>
   <ion-slides *ngIf="loaded" [options]="sliderOptions">
   <ion-slide *ngFor="let key of arrayOfKeys">
-    <h1>{{slider[key].title}}</h1>
+     <div class="overlay_thumbnail_meta">
+                      <span [innerHTML]="slider[key].title"></span>
+     </div>
     <img [src]="slider[key].url" class="slide-image" />
   </ion-slide>
 </ion-slides>
   <ion-list>
-    <ion-item>
-      <ion-icon name="logo-twitter" item-left></ion-icon>
-      Follow us on Twitter
-    </ion-item>
-     <ion-item>
-      <ion-icon name="logo-facebook" item-left></ion-icon>
+     <ion-item-group>
+    <ion-item-divider color="light"></ion-item-divider>
+    <a ion-item target="_blank" href="https://www.facebook.com/BrightonVineyard">
+       <ion-icon name="logo-facebook" item-left></ion-icon>
       Like us on Facebook
-    </ion-item>
-     <ion-item>
-      <ion-icon name="ios-play" item-left (click)="openVideo()"></ion-icon>
+    </a>
+     <a ion-item target="_blank" href="https://twitter.com/btonvineyard">
+     <ion-icon name="logo-twitter" item-left></ion-icon>
+      Follow us on Twitter
+    </a>
+     <a ion-item target="_blank" href="http://www.brightonvineyard.com">
+      <ion-icon name="ios-play" item-left></ion-icon>
       Visit our Website
-    </ion-item>
-  </ion-list>
-   <!--<ng2-map zoom="15" center="50.8341173, -0.1513398" draggable="false">
-          <marker position="50.8341173, -0.1513398"></marker>
-      </ng2-map>-->
+    </a>
+    </ion-item-group>
+     <ion-item-divider color="light"></ion-item-divider>
+     <ion-item>
+       Worship With Us<br>
+       <p>BHASVIC College</p>
+<p>205 Dyke Rd 
+Brighton BN3 6EG</p>
+     </ion-item>
+   </ion-list>
+    <div #map id="map"></div>
+       
 </ion-content>
