@@ -9,13 +9,14 @@ lazy-img {
     width: 100%;
 
     &.placeholder {
-      background-color: grey;
+      //background-color: grey;
       color: grey;
       font-family:  "Ionicons";
       font-size: 64px;
       &:before {
         content: "\f30e";
-        position: absolute;
+        position: relative;
+        margin:20%;
       }
     }
 

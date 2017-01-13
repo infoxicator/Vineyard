@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {HomeService} from '../home/home.service'
 import { NavController } from 'ionic-angular';
 import {ChurchPage} from '../church/church'
+import {NewsPage} from '../news/news'
 import { LoadingController } from 'ionic-angular';
 
 
@@ -13,12 +14,17 @@ import { LoadingController } from 'ionic-angular';
 export class AboutPage {
   public loader = this.loadingCtrl.create();
   pages : Array<string>;
+  newsCategory : any;
   grid: Array<Array<string>>; //array of arrays
   constructor(public navCtrl: NavController, private homeService:HomeService, public loadingCtrl: LoadingController) {
     this.loader.present();
+    this.homeService.getCategory(5)
+    .then(newsCategory => {this.newsCategory = newsCategory;
+      console.log(this.newsCategory.name);
+    })
     this.homeService.getPagesByParent(35)
     .then(pages => this.pages = pages)
-    .then(foo =>  {this.grid = Array(Math.ceil(this.pages.length/2));
+    .then(() =>  {this.grid = Array(Math.ceil(this.pages.length/2));
        let rowNum = 0; //counter to iterate over the rows in the grid
 
        for (let i = 0; i < this.pages.length; i += 2) { //iterate images
@@ -42,6 +48,11 @@ export class AboutPage {
    pageTapped(event, churchPage){
     this.navCtrl.push(ChurchPage, {
       churchPage: churchPage
+    })
+  }
+   newsTapped(event, newsCategory){
+    this.navCtrl.push(NewsPage, {
+      newsCategory: newsCategory
     })
   }
 

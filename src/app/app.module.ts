@@ -19,6 +19,8 @@ import { MediaSeriesPage } from '../pages/media-series/media-series';
 import { MediaCategoryPage } from '../pages/media-category/media-category';
 import { EventDetailPage } from '../pages/event-detail/event-detail';
 import {ChurchPage} from '../pages/church/church'
+import {NewsPage} from '../pages/news/news'
+import { NewspostPage } from '../pages/newspost/newspost'
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import {ChurchPage} from '../pages/church/church'
     MediaCategoryPage,
     EventDetailPage,
     ChurchPage,
+    NewsPage,
+    NewspostPage,
     ElasticHeader,
     LazyImgComponent,
     SecToMinPipe
@@ -66,6 +70,8 @@ tabsPlacement: 'bottom',
     EventDetailPage,
     MediaCategoryPage,
     ChurchPage,
+    NewspostPage,
+    NewsPage,
     LazyImgComponent
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ConnectivityService]

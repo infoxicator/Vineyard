@@ -14,7 +14,8 @@
    <ion-scroll scrollX="true">
      <ion-row>
      <ion-col width-75 *ngFor="let album of videoAlbums" (click)="categoryTapped($event, album)">
-           <div *ngIf="album.pictures && album.pictures.sizes" class="thumbnail-wrapper" [ngStyle]="{'background': 'url('+album.pictures.sizes[2].link+')'}">
+           <div *ngIf="album.pictures && album.pictures.sizes" class="thumbnail-wrapper">
+             <lazy-img src="{{album.pictures.sizes[2].link}}"></lazy-img>
                 <div class="overlay">
                     <div class="overlay_thumbnail_meta">
                       <span class="banner">{{album.name}}</span>
@@ -30,7 +31,8 @@
    <ion-scroll scrollX="true">
      <ion-row>
      <ion-col width-75 *ngFor="let channel of videoChannels" (click)="categoryTapped($event, channel)">
-        <div *ngIf="channel.pictures && channel.pictures.sizes" class="thumbnail-wrapper" [ngStyle]="{'background': 'url('+channel.pictures.sizes[2].link+')'}">
+        <div *ngIf="channel.pictures && channel.pictures.sizes" class="thumbnail-wrapper">
+            <lazy-img src="{{channel.pictures.sizes[2].link}}"></lazy-img>
            <div class="overlay">
               <div class="overlay_thumbnail_meta">
                 <span class="banner">{{channel.name}}</span>

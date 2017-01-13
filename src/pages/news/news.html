@@ -1,0 +1,27 @@
+<!--
+  Generated template for the News page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>News</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  class="card-background-page">
+<ion-list>    
+<ion-card  *ngFor="let newsPost of news" class="thumbnail-wrapper" (click)="postTapped($event, newsPost)">
+  <!--[ngStyle]="{'background': 'url('+churchEvent.better_featured_image.source_url+')'}"> -->
+  <div *ngIf="newsPost.better_featured_image">
+    <lazy-img src={{newsPost.better_featured_image.source_url}}></lazy-img></div>
+                    <div class="overlay_thumbnail_meta">
+                      <span [innerHTML]="newsPost.title.rendered"></span>
+                    </div> 
+  </ion-card>
+    </ion-list>
+</ion-content>

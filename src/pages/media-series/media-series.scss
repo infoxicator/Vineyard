@@ -42,6 +42,13 @@ page-media-series {
         background-size: cover !important;
          background-repeat: no-repeat !important;
      }
+      .thumbnail-wrapper lazy-img{
+             position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+     }
      .overlay_thumbnail_meta {
     z-index: 100;
     position: absolute;

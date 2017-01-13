@@ -56,4 +56,25 @@ export class HomeService {
             .toPromise()
             .then(res => res.json());            
     }
+    getCategory(categoryId:number) {
+       return this.http.get(`${this.baseurl}categories/${categoryId}`)
+            .toPromise()
+            .then(res => res.json());            
+    }
+     getPostsByCategory(categoryName:string) {
+       return this.http.get(`${this.baseurl}posts/?filter[category_name]=${categoryName}`)
+            .toPromise()
+            .then(res => res.json());            
+    }
+    private convertPage(parsedResponse){
+           return Object.keys(parsedResponse)
+            .map(key => ({
+                    id:key,
+                    description: parsedResponse[key].description,
+                    link: parsedResponse[key].link,
+                    name: parsedResponse[key].name,
+                    img: parsedResponse[key].img,
+            }));
+    }
 }
+

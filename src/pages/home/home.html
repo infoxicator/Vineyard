@@ -16,8 +16,8 @@
       
 <ion-card  *ngFor="let churchEvent of churchEvents" class="thumbnail-wrapper" (click)="eventTapped($event, churchEvent)"  >
   <!--[ngStyle]="{'background': 'url('+churchEvent.better_featured_image.source_url+')'}"> -->
- 
-    <lazy-img src={{churchEvent.better_featured_image.source_url}}></lazy-img>
+ <div *ngIf="churchEvent.better_featured_image">
+    <lazy-img src={{churchEvent.better_featured_image.source_url}}></lazy-img></div>
                     <div class="overlay_thumbnail_meta">
                       <span [innerHTML]="churchEvent.title.rendered"></span>
                       <!--<span class="meta">{{album.metadata.connections.videos.total}} Videos / {{ album.duration | SecToMin}}</span>-->
