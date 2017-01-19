@@ -3,6 +3,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { SecToMinPipe } from './sectomin.pipe';
 import { ConnectivityService } from '../providers/connectivity-service';
+import { Storage } from '@ionic/storage';
 //External libraries
 //import { Ng2MapModule} from 'ng2-map';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
@@ -74,6 +75,6 @@ tabsPlacement: 'bottom',
     NewsPage,
     LazyImgComponent
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ConnectivityService]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ConnectivityService, Storage]
 })
 export class AppModule {}

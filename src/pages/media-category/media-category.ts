@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import { NavController, NavParams} from 'ionic-angular';
 import {HomeService} from '../home/home.service'
 import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';  
@@ -16,19 +17,29 @@ import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
 })
 export class MediaCategoryPage {
   category: any;
-  videos = [];
+  videos : any;
   nextPageUri: any;
   loaded = false;
+  sanitizer: any;
 
-  constructor(public navCtrl: NavController, private navParams: NavParams, private homeService:HomeService, sanitizer: DomSanitizer) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private homeService:HomeService, sanitizer: DomSanitizer,
+   storage: Storage) {
+     this.sanitizer = sanitizer;
       this.category = navParams.get('category');
-      this.homeService.getVideosByCategory(this.category.uri)
-      .then(videos => {this.videos = videos.data;
+      homeService.getVideosByCategory(this.category.uri)
+      .then(videos => {
+        this.videos = videos.data;
         this.videos.forEach(video => {
           video.embed.html = sanitizer.bypassSecurityTrustHtml(video.embed.html);
         });
       this.nextPageUri = videos.paging.next;  
-      console.log(this.videos);
+      }).catch(error => {
+        storage.get('videosByCategory').then((videos) => {
+        this.videos = videos.data;
+        this.videos.forEach(video => {
+          video.embed.html = sanitizer.bypassSecurityTrustHtml(video.embed.html);
+        });
+      })
       });
   }
    loadMoreVideos(infiniteScroll) {
@@ -36,8 +47,8 @@ export class MediaCategoryPage {
     console.log('Begin async operation');
     if(this.nextPageUri){
        this.homeService.getMoreVideos(this.nextPageUri)
-      .then(moreVideos =>   {console.log(moreVideos); 
-        for (let i = 0; i < moreVideos.data.length; i++) {
+      .then(moreVideos =>   {for (let i = 0; i < moreVideos.data.length; i++) {
+        moreVideos.data[i].embed.html = this.sanitizer.bypassSecurityTrustHtml(moreVideos.data[i].embed.html);//move to constructor or service
         this.videos.push(moreVideos.data[i]);
       }
      this.nextPageUri = moreVideos.paging.next;  })

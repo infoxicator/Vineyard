@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import {HomeService} from './home.service'
 import {TalksPage} from '../talks/talks'
 import {EventDetailPage} from '../event-detail/event-detail'
@@ -16,20 +17,26 @@ import { LoadingController } from 'ionic-angular';
 })
 export class HomePage {
    public loader = this.loadingCtrl.create( {duration: 60000});
-  churchEvents= []
-  latestPosts= []
+  churchEvents: any;
+  latestPosts: any;
   nextDay: Date;
   homeSegment = 'events';
    constructor(public navCtrl: NavController, private homeService:HomeService,
-   public loadingCtrl: LoadingController) {
+   public loadingCtrl: LoadingController, storage: Storage) {
       //this.loader.present();
      this.nextDay = new Date();
-      this.homeService.getChurchEvents()
-      .subscribe(churchEvents => this.churchEvents = churchEvents)
-       // this.loader.dismiss()
-     // });
-      this.homeService.getLatestPosts()
-       .subscribe(latestPosts => this.latestPosts = latestPosts.data);
+      homeService.getChurchEvents()
+      .subscribe(churchEvents => {this.churchEvents = churchEvents;
+        }, error =>{storage.get('churchEvents').then((churchEvents) => {
+                         this.churchEvents = churchEvents;
+                        })
+        });
+      homeService.getLatestPosts()
+       .subscribe(latestPosts => {this.latestPosts = latestPosts;
+         }, error => {storage.get('latestPosts').then((latestPosts) => {
+                         this.latestPosts = latestPosts;
+                        })
+       });
    }
     itemTapped(event, talk){
     this.navCtrl.push(TalksPage, {
