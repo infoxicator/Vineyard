@@ -1,0 +1,34 @@
+page-player-modal {
+ ion-spinner {
+    display: block;
+    margin: auto;
+  }
+ion-label h4, ion-label p {
+white-space: normal;
+}
+ion-fab .fab[mini]{
+    background-color: transparent !important;
+    margin: 0;
+    width: 25px;
+    height: 25px;
+    padding: 0; 
+    box-shadow: none;
+}
+.player .controls-wrapper, .player .video-wrapper .sidedock{
+display:none !important;
+}
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 35px;
+    height: 0;
+    overflow: hidden;
+}
+.video-container iframe {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+}

@@ -7,6 +7,9 @@
 </ion-header>
 
 <ion-content>
+  <div class="placeholder"  *ngIf="!loaded">
+     <ion-spinner></ion-spinner>
+  </div>
   <ion-slides *ngIf="loaded" [options]="sliderOptions">
   <ion-slide *ngFor="let slide of slider">
      <div class="overlay_thumbnail_meta">

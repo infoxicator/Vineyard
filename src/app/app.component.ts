@@ -17,7 +17,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
-      ImgCache.options.debug = true;
+      //ImgCache.options.debug = true;
       ImgCache.init();
     });
   }

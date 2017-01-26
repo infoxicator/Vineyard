@@ -18,13 +18,16 @@ import {NewspostPage} from '../newspost/newspost'
 export class NewsPage {
  newsCategory:any;
  news:any;
+ newsLoaded: boolean;
   constructor(public navCtrl: NavController,  private navParams: NavParams, private homeService:HomeService,
   storage: Storage) {
       this.newsCategory = navParams.get('newsCategory');
        this.homeService.getPostsByCategory(this.newsCategory.name)
        .subscribe(news => {this.news = news;
+         this.newsLoaded = true;
         }, error =>{storage.get('postsByCategory').then((news) => {
                          this.news = news;
+                         this.newsLoaded = true;
                         })
         });
   }

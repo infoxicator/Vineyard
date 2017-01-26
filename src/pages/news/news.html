@@ -14,6 +14,7 @@
 
 
 <ion-content  class="card-background-page">
+    <ion-spinner *ngIf="!newsLoaded"></ion-spinner>
 <ion-list>    
 <ion-card  *ngFor="let newsPost of news" class="thumbnail-wrapper" (click)="postTapped($event, newsPost)">
   <!--[ngStyle]="{'background': 'url('+churchEvent.better_featured_image.source_url+')'}"> -->

@@ -15,18 +15,24 @@ export class MediaSeriesPage {
   videoAlbums: any;
   videoChannels: any;
   seriesSegment = 'videos';
+  videosLoaded: boolean;
+  channelsLoaded: boolean;
   constructor(public navCtrl: NavController, private homeService:HomeService, public loadingCtrl: LoadingController, 
   storage: Storage) {
      // this.loader.present();
       homeService.getVideoAlbums()
       .subscribe(videoAlbums => {this.videoAlbums = videoAlbums;
+         this.videosLoaded = true;
         }, error =>{storage.get('videoAlbums').then((videoAlbums) => {
+                        this.videosLoaded = true;
                          this.videoAlbums = videoAlbums;
                         })
         });      
       homeService.getVideoChannels()
       .subscribe(videoChannels => {this.videoChannels = videoChannels;
+         this.channelsLoaded = true;
         }, error =>{storage.get('videoChannels').then((videoChannels) => {
+                         this.channelsLoaded = true;
                          this.videoChannels = videoChannels;
                         })
         });      

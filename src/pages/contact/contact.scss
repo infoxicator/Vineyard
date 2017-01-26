@@ -1,4 +1,11 @@
 page-contact {
+                ion-spinner {
+    display: block;
+    margin: auto;
+  }
+  .placeholder{
+      height: 30vh;
+  }
     ion-slides {
     height: 30vh;
    }

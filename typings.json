@@ -3,6 +3,7 @@
     "google-maps": "registry:dt/google-maps#3.2.1+20161129151841"
   },
   "globalDependencies": {
-    "google.maps": "registry:dt/google.maps#3.25.0+20161208205818"
+    "google.maps": "registry:dt/google.maps#3.25.0+20161208205818",
+    "vimeo": "registry:dt/vimeo#0.0.0+20160727010356"
   }
 }

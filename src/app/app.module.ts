@@ -22,6 +22,7 @@ import { EventDetailPage } from '../pages/event-detail/event-detail';
 import {ChurchPage} from '../pages/church/church'
 import {NewsPage} from '../pages/news/news'
 import { NewspostPage } from '../pages/newspost/newspost'
+import { PlayerModal } from '../pages/modal/player-modal'
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NewspostPage } from '../pages/newspost/newspost'
     ChurchPage,
     NewsPage,
     NewspostPage,
+    PlayerModal,
     ElasticHeader,
     LazyImgComponent,
     SecToMinPipe
@@ -73,6 +75,7 @@ tabsPlacement: 'bottom',
     ChurchPage,
     NewspostPage,
     NewsPage,
+    PlayerModal,
     LazyImgComponent
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ConnectivityService, Storage]

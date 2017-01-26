@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController, NavParams} from 'ionic-angular';
+import { ModalController, NavController, NavParams} from 'ionic-angular';
 import {HomeService} from '../home/home.service'
-import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';  
+import {PlayerModal} from '../modal/player-modal'
+import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
 
 /*
   Generated class for the MediaCategory page.
@@ -23,7 +24,7 @@ export class MediaCategoryPage {
   sanitizer: any;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private homeService:HomeService, sanitizer: DomSanitizer,
-   storage: Storage) {
+   storage: Storage, public modalCtrl: ModalController) {
      this.sanitizer = sanitizer;
       this.category = navParams.get('category');
       homeService.getVideosByCategory(this.category.uri)
@@ -61,6 +62,10 @@ export class MediaCategoryPage {
     }
    
   }
+  playVideo(event, videoel){
+   let playerModal = this.modalCtrl.create(PlayerModal, { videoel });
+   playerModal.present();
+  }
 
   ionViewDidLoad() {
      setTimeout(() => {
@@ -68,5 +73,4 @@ export class MediaCategoryPage {
      }, 400);
     console.log('Hello MediaCategoryPage Page');         
   }
-
 }

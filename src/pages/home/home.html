@@ -11,7 +11,9 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="card-background-page">
+      <ion-spinner *ngIf="!contentLoaded"></ion-spinner>
   <div [ngSwitch]="homeSegment">
+
     <ion-list *ngSwitchCase="'events'">
       
 <ion-card  *ngFor="let churchEvent of churchEvents" class="thumbnail-wrapper" (click)="eventTapped($event, churchEvent)"  >
@@ -25,7 +27,7 @@
   </ion-card>
     </ion-list>
     <ion-list *ngSwitchCase="'media'">
-    <ion-item *ngFor="let video of latestPosts">
+    <ion-item *ngFor="let video of latestPosts" (click)="playVideo($event, video)">
          <ion-thumbnail item-left>
        <lazy-img src={{video.pictures.sizes[1].link_with_play_button}}></lazy-img>
       <span>{{ video.duration | SecToMin}}</span>

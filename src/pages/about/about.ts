@@ -17,19 +17,25 @@ export class AboutPage {
   pages : Array<string>;
   newsCategory : any;
   grid: Array<Array<string>>; //array of arrays
+  newsLoaded: boolean;
+  gridLoaded: boolean;
   constructor(public navCtrl: NavController, private homeService:HomeService, public loadingCtrl: LoadingController,
   storage: Storage) {
     //this.loader.present();
     this.homeService.getCategory(5)
      .subscribe(newsCategory => {this.newsCategory = newsCategory;
+       this.newsLoaded = true;
         }, error =>{storage.get('newsCategory').then((newsCategory) => {
+                         this.newsLoaded = true;
                          this.newsCategory = newsCategory;
                         })
         });
     this.homeService.getPagesByParent(35)
      .subscribe(pages => {this.createGrid(pages);
+       this.gridLoaded=true;
         }, error =>{storage.get('pages').then((pages) => {
                          this.createGrid(pages);
+                         this.gridLoaded=true;
                         })
         });  
   }
