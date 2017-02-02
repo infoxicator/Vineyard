@@ -6,9 +6,8 @@ import {EventDetailPage} from '../event-detail/event-detail'
 import {PlayerModal} from '../modal/player-modal'
 //import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
-import { NavController, ModalController } from 'ionic-angular';
-import { LoadingController } from 'ionic-angular';
-import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+import { NavController, ModalController, ActionSheetController, LoadingController, ToastController } from 'ionic-angular';
+import {DomSanitizer} from '@angular/platform-browser';
 
 
 
@@ -25,7 +24,8 @@ export class HomePage {
   homeSegment = 'events';
   contentLoaded: boolean;
    constructor(public navCtrl: NavController, private homeService:HomeService,
-   public loadingCtrl: LoadingController, storage: Storage, public modalCtrl: ModalController, public sanitizer: DomSanitizer) {
+   public loadingCtrl: LoadingController, storage: Storage, public modalCtrl: ModalController, public sanitizer: DomSanitizer, 
+   public actionSheetCtrl: ActionSheetController, private toastCtrl: ToastController) {
       //this.loader.present();
      this.nextDay = new Date();
       homeService.getChurchEvents()
@@ -58,6 +58,45 @@ export class HomePage {
     console.log(videoel);
    let playerModal = this.modalCtrl.create(PlayerModal, { videoel });
    playerModal.present();
+  }
+  presentToast() {
+  let toast = this.toastCtrl.create({
+    message: 'Added to Watch Later',
+    duration: 1500,
+    position: 'middle'
+  });
+  toast.present();
+}
+  saveToWatchLater(videoToSave){
+    this.homeService.saveToWatchLaterList(videoToSave);
+    this.presentToast();
+  }
+   presentActionSheet(videoTapped) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: '',
+      buttons: [
+        {
+          text: 'Add to Watch Later',
+          icon: 'time',
+          handler: () => {
+            this.saveToWatchLater(videoTapped);
+          }
+        },{
+          text: 'Share',
+          icon: 'paper-plane',
+          handler: () => {
+            //this.homeService.deleteFromWatchlaterList(videoTapped);
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            //console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 }
      

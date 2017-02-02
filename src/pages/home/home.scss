@@ -82,8 +82,8 @@ text-shadow: 0 1px 0 black;
     min-width: 12rem;    
     min-height: 10rem;
     img {
-        max-width: 16rem;    
-        min-width: 10rem;
+        max-width: 14rem;    
+        min-width: 12rem;
         max-height: 10rem;
     }
 }
@@ -96,11 +96,18 @@ ion-thumbnail span {
     background-color: rgba(0, 0, 0, 0.5);
     font-size: 1.2rem;
 }
-ion-item h5{
+ion-item ion-label h5{
+    font-size: 1rem !important;
   white-space: normal;
-   line-height: 1.0em !important;
-    height: 2.1em !important;
+   //line-height: 1.0em !important;
+   // height: 2.1em !important;
     overflow: hidden;
     font-weight: bold !important;
+}
+ion-item ion-label p {
+    font-size: 1rem !important;
+}
+ion-item ion-label {
+    margin:0 !important;
 }
 }

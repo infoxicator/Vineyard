@@ -27,15 +27,15 @@
   </ion-card>
     </ion-list>
     <ion-list *ngSwitchCase="'media'">
-    <ion-item *ngFor="let video of latestPosts" (click)="playVideo($event, video)">
-         <ion-thumbnail item-left>
+    <ion-item *ngFor="let video of latestPosts" >
+         <ion-thumbnail item-left (click)="playVideo($event, video)">
        <lazy-img src={{video.pictures.sizes[1].link_with_play_button}}></lazy-img>
       <span>{{ video.duration | SecToMin}}</span>
     </ion-thumbnail>   
-      <h5 [innerHTML]="video.name"></h5>
-      <p [innerHTML]="video.description"></p>
+      <h5 [innerHTML]="video.name" (click)="playVideo($event, video)"></h5>
+      <p [innerHTML]="video.description" (click)="playVideo($event, video)"></p>
       <p>{{video.release_time | amTimeAgo}} - {{video.stats.plays}} plays</p>
-      <button ion-button clear item-right><ion-icon name="more"></ion-icon></button>
+      <button ion-button clear item-right (click)="presentActionSheet(video)" style="margin:0;" ><ion-icon name="more"></ion-icon></button>
     </ion-item>
     </ion-list>
   </div>

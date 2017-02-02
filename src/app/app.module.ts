@@ -23,6 +23,9 @@ import {ChurchPage} from '../pages/church/church'
 import {NewsPage} from '../pages/news/news'
 import { NewspostPage } from '../pages/newspost/newspost'
 import { PlayerModal } from '../pages/modal/player-modal'
+import { VideoPlaylistsPage } from '../pages/video-playlists/video-playlists'
+import { VideoChannelsPage } from '../pages/video-channels/video-channels'
+import { WatchLaterPage } from '../pages/watch-later/watch-later'
 
 @NgModule({
   declarations: [
@@ -40,6 +43,9 @@ import { PlayerModal } from '../pages/modal/player-modal'
     NewsPage,
     NewspostPage,
     PlayerModal,
+    VideoPlaylistsPage,
+    VideoChannelsPage,
+    WatchLaterPage,
     ElasticHeader,
     LazyImgComponent,
     SecToMinPipe
@@ -76,6 +82,9 @@ tabsPlacement: 'bottom',
     NewspostPage,
     NewsPage,
     PlayerModal,
+    VideoPlaylistsPage,
+    VideoChannelsPage,
+    WatchLaterPage,
     LazyImgComponent
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ConnectivityService, Storage]
