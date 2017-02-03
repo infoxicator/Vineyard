@@ -1,5 +1,5 @@
 import { Component, ViewChild, Renderer } from '@angular/core';
-import { ModalController, NavController, NavParams, ViewController, ActionSheetController } from 'ionic-angular';
+import { ModalController, NavController, NavParams, ViewController, ActionSheetController, LoadingController} from 'ionic-angular';
 import { HomeService } from '../home/home.service'
 import Player from '@vimeo/player';
 
@@ -11,15 +11,19 @@ import Player from '@vimeo/player';
 export class PlayerModal {
 
   @ViewChild('iframe') iframe;
+  @ViewChild('vimeoplayer') div;
   video: any;
+  videoId: number;
+  currentVideo: any;
   iframeElement: any;
   videoLoaded: boolean;
   watchLaterList: any;
   watchLaterLoaded: boolean;
   player: any;
+//  public loader = this.loadingCtrl.create( {duration: 60000});
 
   constructor(navParams: NavParams, public viewCtrl: ViewController, public renderer: Renderer, public homeService: HomeService,
-    public actionSheetCtrl: ActionSheetController) {
+    public actionSheetCtrl: ActionSheetController, public loadingCtrl: LoadingController,) {
     this.homeService.getWatchLaterList()
       .then(watchLaterList => {
       this.watchLaterList = watchLaterList;
@@ -27,13 +31,20 @@ export class PlayerModal {
       });
 
     this.video = navParams.get('videoel');
+    this.videoId = homeService.getVimeoId(this.video.link);
+    this.currentVideo = this.video;
     console.log('Video Object', navParams.get('videoel'));
     //console.log(this.el);
   }
+  createLoader() {
+  return this.loadingCtrl.create({
+    duration: 30000
+  });
+}
   removeFromList(videoToRemove) {
     const index = this.watchLaterList.find(it => it.uri === videoToRemove.uri)
     this.watchLaterList.splice(index, 1);
-    this.homeService.deleteFromWatchlaterList(videoToRemove);
+      this.homeService.deleteFromWatchlaterList(videoToRemove);
   }
   presentActionSheet(videoTapped) {
     let actionSheet = this.actionSheetCtrl.create({
@@ -64,14 +75,10 @@ export class PlayerModal {
     actionSheet.present();
   }
   ionViewDidLoad() {
-    this.iframeElement = this.renderer.selectRootElement("iframe");
-    var options = {
-        id: 59777392,
-        width: 640,
-        loop: true,
-        color: '#7f6ffa'
-    };
-    this.player = new Player(this.iframeElement, options);
+    //this.iframeElement = this.renderer.selectRootElement("iframe");
+    //this.player = new Player(this.iframeElement);
+    this.player = new Player(this.div.nativeElement, {
+    id: this.videoId});
     this.player.play().then(function () {
       // the video was played
     }).catch(function (error) {
@@ -91,15 +98,20 @@ export class PlayerModal {
       }
     });
   }
-  playloaded(){
-     this.player.play()
-  }
   playNewVideo(videoLater) {
+    let loading = this.createLoader();
     let vimeoId = this.homeService.getVimeoId(videoLater.link)
-    console.log(vimeoId);
-   this.player.loadVideo(vimeoId).then(function (id) {
-      // the video successfully loaded
+    if(vimeoId && this.player){
+    loading.present()
+    this.player.loadVideo(vimeoId).then(() => {
+    this.currentVideo = videoLater;
+    this.player.play();
+    loading.dismiss();
     }).catch(function (error) {
+   if(loading){
+      loading.dismiss();
+    }
+      
       switch (error.name) {
         case 'TypeError':
           // the id was not a number
@@ -120,6 +132,8 @@ export class PlayerModal {
       }
     });
   }
+}
+
 
   dismiss() {
     this.viewCtrl.dismiss();

@@ -16,29 +16,30 @@
   </ion-fab>
 
 <ion-header>
-  <div [innerHTML]="video.embed.html" class="video-container"></div>
+  <div #vimeoplayer class="video-container"></div>
+  <!--<div [innerHTML]="video.embed.html" class="video-container"></div>-->
   </ion-header>
 <ion-content>
   <br>
 <ion-list class="card-background-page">
             <ion-item style="border:none;">
               <ion-avatar item-left>
-                <img src="{{video.user.pictures.sizes[2].link}}">
+                <img src="{{currentVideo.user.pictures.sizes[2].link}}">
               </ion-avatar>
-                <h4><strong>{{video.name}}</strong></h4>
-            <p>{{video.release_time | amTimeAgo}} - {{video.stats.plays}} plays</p>
+                <h4><strong>{{currentVideo.name}}</strong></h4>
+            <p>{{currentVideo.release_time | amTimeAgo}} - {{currentVideo.stats.plays}} plays</p>
         </ion-item>
         <ion-item>
           <br>
-          <p align="justify">{{video.description}}</p>
+          <p align="justify">{{currentVideo.description}}</p>
           <br>
-          <p>Uploaded on {{video.release_time | amDateFormat:'LL'}}</p>
+          <p>Uploaded on {{currentVideo.release_time | amDateFormat:'LL'}}</p>
         </ion-item>
   </ion-list>
-   <ion-item-divider color="light" *ngIf="watchLaterList && watchLaterList.length > 0"><strong>Watch Later: {{watchLaterList.length}} Videos</strong></ion-item-divider>
+   <ion-item-divider color="light" *ngIf="watchLaterList && watchLaterList.length > 0"><strong>Watch Later:</strong></ion-item-divider>
  <ion-list>
    <div *ngFor="let videoLater of watchLaterList">
-    <ion-item  *ngIf="videoLater.uri != video.uri">
+    <ion-item  *ngIf="videoLater.uri != currentVideo.uri">
          <ion-thumbnail item-left  (click)="playNewVideo(videoLater)">
        <lazy-img src={{videoLater.pictures.sizes[1].link_with_play_button}}  *ngIf="videoLater.pictures.sizes[1]"></lazy-img>
       <span>{{ video.duration | SecToMin}}</span>
@@ -49,5 +50,4 @@
     </ion-item>
     </div>
     </ion-list>
-    <button ion-button clear (click)="playloaded()"></button>
 </ion-content>
