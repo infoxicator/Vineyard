@@ -1,25 +1,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{category.name}}</ion-title>
+    <ion-title>{{category?.name}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content>
   <ion-list class="card-background-page">
     <ion-card ion-item *ngFor="let video of videos" >
             <ion-item>
-              <ion-avatar item-left>
-                <img src="{{video.user.pictures.sizes[2].link}}">
+              <ion-avatar item-left *ngIf="video?.user?.pictures?.sizes">
+                <img src="{{video?.user?.pictures?.sizes[2]?.link}}"> <!--safe navigator with index will be fixed on the next update of angular -->
+           <div class="overlay"></div>
               </ion-avatar>
-                <h4>{{video.name}}</h4>
-            <p>{{video.release_time | amTimeAgo}} - {{video.stats.plays}} plays</p>
+                <h4>{{video?.name}}</h4>
+            <p>{{video?.release_time | amTimeAgo}} - {{video?.stats?.plays}} plays</p>
                <button ion-button clear item-right (click)="presentActionSheet(video)"><ion-icon name="more"></ion-icon></button>
         </ion-item>
-         <!--<div [innerHTML]="video.embed.html" class="video-container"></div> -->
-        <div class="video-picture" *ngIf="video.pictures">
-         <lazy-img src={{video.pictures.sizes[3].link_with_play_button}} (click)="playVideo($event, video)"></lazy-img>
-           <span>{{ video.duration | SecToMin}}</span>
-        </div>
+         <!--<div [innerHTML]="video?.embed.html" class="video-container"></div> -->
+     <div class="video-picture" *ngIf="video?.pictures?.sizes">
+         <lazy-img src={{video?.pictures?.sizes[3]?.link_with_play_button}} (click)="playVideo($event, video)"></lazy-img>
+           <span>{{ video?.duration | SecToMin}}</span>
+     </div>
     </ion-card>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="loadMoreVideos($event)" *ngIf="nextPageUri">

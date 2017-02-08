@@ -10,12 +10,12 @@
   <div class="placeholder"  *ngIf="!loaded">
      <ion-spinner></ion-spinner>
   </div>
-  <ion-slides *ngIf="loaded" [options]="sliderOptions">
+  <ion-slides *ngIf="loaded" [autoplay]="3000" [loop]="true">
   <ion-slide *ngFor="let slide of slider">
      <div class="overlay_thumbnail_meta">
-                      <span [innerHTML]="slide.title"></span>
+                      <span [innerHTML]="slide?.title"></span>
      </div>
-    <img [src]="slide.url" class="slide-image" />
+    <img [src]="slide?.url" class="slide-image" />
   </ion-slide> 
 </ion-slides>
   <ion-list>

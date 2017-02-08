@@ -1,5 +1,5 @@
 import { Component, ViewChild, Renderer } from '@angular/core';
-import { ModalController, NavController, NavParams, ViewController, ActionSheetController, LoadingController} from 'ionic-angular';
+import { ModalController, NavController, NavParams, ViewController, ActionSheetController, LoadingController, Platform} from 'ionic-angular';
 import { HomeService } from '../home/home.service'
 import Player from '@vimeo/player';
 
@@ -23,7 +23,7 @@ export class PlayerModal {
 //  public loader = this.loadingCtrl.create( {duration: 60000});
 
   constructor(navParams: NavParams, public viewCtrl: ViewController, public renderer: Renderer, public homeService: HomeService,
-    public actionSheetCtrl: ActionSheetController, public loadingCtrl: LoadingController,) {
+    public actionSheetCtrl: ActionSheetController, public loadingCtrl: LoadingController, public plt: Platform) {
     this.homeService.getWatchLaterList()
       .then(watchLaterList => {
       this.watchLaterList = watchLaterList;
@@ -78,8 +78,13 @@ export class PlayerModal {
     //this.iframeElement = this.renderer.selectRootElement("iframe");
     //this.player = new Player(this.iframeElement);
     this.player = new Player(this.div.nativeElement, {
-    id: this.videoId});
-    this.player.play().then(function () {
+    id: this.videoId})
+     if (this.plt.is('ios')) {
+      // This will only print when on iOS, Hidding the auto play since apple doesnt support it without user interaction
+      //console.log("I'm an iOS device!");
+    }else{
+      //console.log('this is android');
+      this.player.play().then(function () {
       // the video was played
     }).catch(function (error) {
       switch (error.name) {
@@ -97,6 +102,8 @@ export class PlayerModal {
           break;
       }
     });
+    }
+   
   }
   playNewVideo(videoLater) {
     let loading = this.createLoader();
@@ -105,8 +112,15 @@ export class PlayerModal {
     loading.present()
     this.player.loadVideo(vimeoId).then(() => {
     this.currentVideo = videoLater;
+     loading.dismiss();
+     if (this.plt.is('ios')) {
+       
+      // This will only print when on iOS, Hidding the auto play since apple doesnt support it without user interaction
+      //console.log("I'm an iOS device!");
+    }else{
+      //console.log('this is android');
     this.player.play();
-    loading.dismiss();
+  }
     }).catch(function (error) {
    if(loading){
       loading.dismiss();

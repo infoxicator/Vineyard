@@ -7,13 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{churchPage.title.rendered}}</ion-title>
+    <ion-title>{{churchPage?.title?.rendered}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content elastic-header>
-<div class="background-image" [ngStyle]="{'background-image': 'url('+churchPage.better_featured_image.source_url+')'}"></div>
-<div class="main-content" padding [innerHTML]="churchPage.content.rendered" align="justify"> 
+<ion-content parallax-header>
+<div class="header-image" [ngStyle]="{'background-image': 'url('+churchPage?.better_featured_image?.source_url+')'}"></div>
+<div class="main-content" padding [innerHTML]="churchPage?.content?.rendered" align="justify"> 
 </div>
 </ion-content>

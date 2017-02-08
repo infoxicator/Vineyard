@@ -1,15 +1,11 @@
 page-newspost {
-     .background-image {       
-        background-size: cover;
-        background-position: center;
-        height: 45vw;
-    }
- 
-    .main-content {
-        padding: 20px;
-        background-color: white;
-        position: absolute;
-    }
+       .header-image {
+    height: 40vh;
+} 
+.main-content {
+    padding: 20px;
+    background-color: white;
+}
 
 .video-container {
     position: relative;

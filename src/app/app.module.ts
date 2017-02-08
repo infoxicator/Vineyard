@@ -6,6 +6,7 @@ import { ConnectivityService } from '../providers/connectivity-service';
 import { Storage } from '@ionic/storage';
 //External libraries
 //import { Ng2MapModule} from 'ng2-map';
+import { ParallaxHeader } from '../components/parallax-header/parallax-header';
 import { ElasticHeader } from '../components/elastic-header/elastic-header';
 import {MomentModule} from 'angular2-moment';
 import { LazyImgComponent } from '../global/components/';
@@ -48,7 +49,8 @@ import { WatchLaterPage } from '../pages/watch-later/watch-later'
     WatchLaterPage,
     ElasticHeader,
     LazyImgComponent,
-    SecToMinPipe
+    SecToMinPipe,
+    ParallaxHeader
   ],
   imports: [
     IonicModule.forRoot(MyApp, {

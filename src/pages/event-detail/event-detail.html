@@ -6,11 +6,11 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content elastic-header>
-<div class="background-image" [ngStyle]="{'background-image': 'url('+churchEvent.better_featured_image.source_url+')'}"></div>
+<ion-content parallax-header>
+<div class="header-image" [ngStyle]="{'background-image': 'url('+churchEvent?.better_featured_image?.source_url+')'}"></div>
 <div class="main-content" padding> 
-        <h3 [innerHTML]="churchEvent.title.rendered"></h3>
+        <h3 [innerHTML]="churchEvent?.title?.rendered"></h3>
         <br> 
-        <p [innerHTML]="churchEvent.content.rendered" align="justify">
+        <p [innerHTML]="churchEvent?.content?.rendered" align="justify">
   </div> 
 </ion-content>

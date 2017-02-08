@@ -18,10 +18,9 @@
       
 <ion-card  *ngFor="let churchEvent of churchEvents" class="thumbnail-wrapper" (click)="eventTapped($event, churchEvent)"  >
   <!--[ngStyle]="{'background': 'url('+churchEvent.better_featured_image.source_url+')'}"> -->
- <div *ngIf="churchEvent.better_featured_image">
-    <lazy-img src={{churchEvent.better_featured_image.source_url}}></lazy-img></div>
+    <lazy-img src={{churchEvent?.better_featured_image?.source_url}}></lazy-img>
                     <div class="overlay_thumbnail_meta">
-                      <span [innerHTML]="churchEvent.title.rendered"></span>
+                      <span [innerHTML]="churchEvent?.title?.rendered"></span>
                       <!--<span class="meta">{{album.metadata.connections.videos.total}} Videos / {{ album.duration | SecToMin}}</span>-->
                     </div> 
   </ion-card>
@@ -29,12 +28,12 @@
     <ion-list *ngSwitchCase="'media'">
     <ion-item *ngFor="let video of latestPosts" >
          <ion-thumbnail item-left (click)="playVideo($event, video)">
-       <lazy-img src={{video.pictures.sizes[1].link_with_play_button}}></lazy-img>
-      <span>{{ video.duration | SecToMin}}</span>
+       <lazy-img src={{video?.pictures?.sizes[1]?.link_with_play_button}}></lazy-img>
+      <span>{{ video?.duration | SecToMin}}</span>
     </ion-thumbnail>   
-      <h5 [innerHTML]="video.name" (click)="playVideo($event, video)"></h5>
-      <p [innerHTML]="video.description" (click)="playVideo($event, video)"></p>
-      <p>{{video.release_time | amTimeAgo}} - {{video.stats.plays}} plays</p>
+      <h5 [innerHTML]="video?.name" (click)="playVideo($event, video)"></h5>
+      <p [innerHTML]="video?.description" (click)="playVideo($event, video)"></p>
+      <p>{{video?.release_time | amTimeAgo}} - {{video?.stats?.plays}} plays</p>
       <button ion-button clear item-right (click)="presentActionSheet(video)" style="margin:0;" ><ion-icon name="more"></ion-icon></button>
     </ion-item>
     </ion-list>

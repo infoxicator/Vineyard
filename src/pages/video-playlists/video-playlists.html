@@ -13,8 +13,8 @@
            <lazy-img src="{{album.pictures.sizes[2].link}}" *ngIf="album.pictures.sizes[2]"></lazy-img>
             <div class="overlay">
                     <div class="overlay_thumbnail_meta">
-                      <span class="banner">{{album.name}}</span>
-                      <span class="meta">{{album.metadata.connections.videos.total}} Videos / {{ album.duration | SecToMin}}</span>
+                      <span class="banner">{{album?.name}}</span>
+                      <span class="meta">{{album?.metadata?.connections?.videos?.total}} Videos / {{ album?.duration | SecToMin}}</span>
                     </div> 
                 </div>
     </div>

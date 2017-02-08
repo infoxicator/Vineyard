@@ -23,29 +23,29 @@
   <br>
 <ion-list class="card-background-page">
             <ion-item style="border:none;">
-              <ion-avatar item-left>
-                <img src="{{currentVideo.user.pictures.sizes[2].link}}">
+              <ion-avatar item-left *ngIf="currentVideo?.user?.pictures?.sizes">
+                <img src="{{currentVideo?.user?.pictures.sizes[2].link}}">
               </ion-avatar>
-                <h4><strong>{{currentVideo.name}}</strong></h4>
-            <p>{{currentVideo.release_time | amTimeAgo}} - {{currentVideo.stats.plays}} plays</p>
+                <h4><strong>{{currentVideo?.name}}</strong></h4>
+            <p>{{currentVideo?.release_time | amTimeAgo}} - {{currentVideo?.stats?.plays}} plays</p>
         </ion-item>
         <ion-item>
           <br>
-          <p align="justify">{{currentVideo.description}}</p>
+          <p align="justify">{{currentVideo?.description}}</p>
           <br>
-          <p>Uploaded on {{currentVideo.release_time | amDateFormat:'LL'}}</p>
+          <p>Uploaded on {{currentVideo?.release_time | amDateFormat:'LL'}}</p>
         </ion-item>
   </ion-list>
    <ion-item-divider color="light" *ngIf="watchLaterList && watchLaterList.length > 0"><strong>Watch Later:</strong></ion-item-divider>
  <ion-list>
    <div *ngFor="let videoLater of watchLaterList">
-    <ion-item  *ngIf="videoLater.uri != currentVideo.uri">
+    <ion-item  *ngIf="videoLater?.uri != currentVideo?.uri">
          <ion-thumbnail item-left  (click)="playNewVideo(videoLater)">
-       <lazy-img src={{videoLater.pictures.sizes[1].link_with_play_button}}  *ngIf="videoLater.pictures.sizes[1]"></lazy-img>
-      <span>{{ video.duration | SecToMin}}</span>
+       <lazy-img src={{videoLater?.pictures?.sizes[1]?.link_with_play_button}}  *ngIf="videoLater?.pictures?.sizes[1]"></lazy-img>
+      <span>{{ video?.duration | SecToMin}}</span>
     </ion-thumbnail>   
       <h5 [innerHTML]="videoLater.name"></h5>
-      <p>{{video.release_time | amTimeAgo}} - {{video.stats.plays}} plays</p>
+      <p>{{video?.release_time | amTimeAgo}} - {{video?.stats?.plays}} plays</p>
       <button ion-button clear item-right (click)="presentActionSheet(videoLater)" style="margin:0;" ><ion-icon name="more"></ion-icon></button>
     </ion-item>
     </div>

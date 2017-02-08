@@ -18,14 +18,6 @@ export class ContactPage {
   loaded = false;
   arrayOfKeys = [];
   slider:any;
-  sliderOptions = {
-    initialSlide: 2,
-    loop: true,
-    autoplay: 2000,
-    autoplayDisableOnInteraction: true,
-    autoHeight: true
-  };
-
   map: any;
   mapInitialised: boolean = false;
   apiKey: any = "AIzaSyAREiBD0jH1edwsi-pRAnoytslyOAojRqY";
