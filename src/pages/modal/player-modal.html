@@ -33,7 +33,7 @@
           <br>
           <p align="justify">{{currentVideo?.description}}</p>
           <br>
-          <p>Uploaded on {{currentVideo?.release_time | amDateFormat:'LL'}}</p>
+          <p>Uploaded on {{currentVideo?.release_time | amDateFormat:'LL'}} <button ion-button clear item-right (click)="share(currentVideo)"><ion-icon name="paper-plane"> Share</ion-icon></button></p> 
         </ion-item>
   </ion-list>
    <ion-item-divider color="light" *ngIf="watchLaterList && watchLaterList.length > 0"><strong>Watch Later:</strong></ion-item-divider>

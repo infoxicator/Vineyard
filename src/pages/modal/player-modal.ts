@@ -2,6 +2,7 @@ import { Component, ViewChild, Renderer } from '@angular/core';
 import { ModalController, NavController, NavParams, ViewController, ActionSheetController, LoadingController, Platform} from 'ionic-angular';
 import { HomeService } from '../home/home.service'
 import Player from '@vimeo/player';
+import { SocialSharing } from 'ionic-native';
 
 @Component({
   selector: 'page-player-modal',
@@ -61,7 +62,7 @@ export class PlayerModal {
           text: 'Share',
           icon: 'paper-plane',
           handler: () => {
-            //this.homeService.deleteFromWatchlaterList(videoTapped);
+             this.share(videoTapped);
           }
         }, {
           text: 'Cancel',
@@ -73,6 +74,18 @@ export class PlayerModal {
       ]
     });
     actionSheet.present();
+  }
+  share(elementToShare) {
+    var options = {
+      message: 'Watch this video on Vimeo:', // not supported on some apps (Facebook, Instagram)
+      subject: elementToShare.name, // fi. for email
+      files: ['', ''], // an array of filenames either locally or remotely
+      url: elementToShare.link,
+      chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+    }
+    SocialSharing.shareWithOptions(options).then(() => {
+    }).catch(() => {
+    });
   }
   ionViewDidLoad() {
     //this.iframeElement = this.renderer.selectRootElement("iframe");

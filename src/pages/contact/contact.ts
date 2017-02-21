@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { ConnectivityService } from '../../providers/connectivity-service';
 import { HomeService } from '../home/home.service'
 import { LoadingController } from 'ionic-angular';
+import { LaunchNavigator, LaunchNavigatorOptions } from 'ionic-native';
 
 declare var google;
 
@@ -17,20 +18,40 @@ export class ContactPage {
   public loader = this.loadingCtrl.create();
   loaded = false;
   arrayOfKeys = [];
-  slider:any;
+  slider: any;
   map: any;
   mapInitialised: boolean = false;
   apiKey: any = "AIzaSyAREiBD0jH1edwsi-pRAnoytslyOAojRqY";
+  destination:string;
+  start:string;
+
   constructor(public navCtrl: NavController, private homeService: HomeService, public connectivityService: ConnectivityService,
     public loadingCtrl: LoadingController, storage: Storage) {
+       this.start = "";
+    this.destination = "50.8341173, -0.1513398";
     //this.loader.present();
     this.loadGoogleMaps();
     this.homeService.getPage(1104)
-    .subscribe(page => {this.slider = page;
-        }, error =>{storage.get('page').then((page) => {
-                         this.slider = page;
-                        })
-        });
+      .subscribe(page => {
+      this.slider = page;
+      this.loaded = true;
+      }, error => {
+        storage.get('page').then((page) => {
+          this.slider = page;
+          this.loaded = true;
+        })
+      });
+  }
+  navigate(){
+    let options: LaunchNavigatorOptions = {
+      start: this.start
+    };
+
+    LaunchNavigator.navigate(this.destination, options)
+        .then(
+            success => //alert('Launched navigator'),
+            error => alert('Error launching navigator: ' + error)
+    );
   }
 
   loadGoogleMaps() {
@@ -122,12 +143,6 @@ export class ContactPage {
     });
     let content = "<h5>Doing church 10:30 am sundays...</h5><p>BHASVIC College</p>";
     this.addInfoWindow(marker, content);
-  }
-
-  ionViewDidLoad() {
-    setTimeout(() => {
-      this.loaded = true;
-    }, 1000);
   }
 
 }

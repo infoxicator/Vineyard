@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-item-divider color="light"><strong>PlayLists</strong><button ion-button clear item-right (click)="morePlaylists()">See All<ion-icon name="arrow-forward" item-right></ion-icon></button></ion-item-divider>
+  <ion-item-divider color="white"><strong>PlayLists</strong><button ion-button clear item-right (click)="morePlaylists()">See All<ion-icon name="arrow-forward" item-right></ion-icon></button></ion-item-divider>
   <ion-spinner *ngIf="!videosLoaded"></ion-spinner>
    <ion-scroll scrollX="true">
      <ion-row>
@@ -22,7 +22,7 @@
       </ion-col>
     </ion-row>
    </ion-scroll>
-   <ion-item-divider color="light"><strong>Channels</strong><button ion-button clear item-right (click)="moreChannels()">See All<ion-icon name="arrow-forward" item-right></ion-icon></button></ion-item-divider>
+   <ion-item-divider color="white"><strong>Channels</strong><button ion-button clear item-right (click)="moreChannels()">See All<ion-icon name="arrow-forward" item-right></ion-icon></button></ion-item-divider>
     <ion-spinner *ngIf="!channelsLoaded"></ion-spinner>
    <ion-scroll scrollX="true">
      <ion-row>
@@ -41,7 +41,7 @@
    </ion-scroll>
    <ion-spinner *ngIf="!watchLaterLoaded"></ion-spinner>
    <div *ngIf="watchLaterList">
-   <ion-item-divider color="light"><strong>Watch Later</strong><button ion-button clear item-right (click)="seeWatchLater()">See All<ion-icon name="arrow-forward" item-right></ion-icon></button></ion-item-divider>
+   <ion-item-divider color="white"><strong>Watch Later</strong><button ion-button clear item-right (click)="seeWatchLater()">See All<ion-icon name="arrow-forward" item-right></ion-icon></button></ion-item-divider>
    <ion-scroll scrollX="true">
      <ion-row>
      <ion-col width-75 *ngFor="let video of watchLaterList" (click)="playVideo($event, video)">

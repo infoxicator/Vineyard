@@ -4,6 +4,7 @@ import { ModalController, NavController, NavParams, ActionSheetController, Toast
 import {HomeService} from '../home/home.service'
 import {PlayerModal} from '../modal/player-modal'
 import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+import { SocialSharing } from 'ionic-native';
 
 /*
   Generated class for the MediaCategory page.
@@ -92,7 +93,7 @@ export class MediaCategoryPage {
           text: 'Share',
           icon: 'paper-plane',
           handler: () => {
-            //this.homeService.deleteFromWatchlaterList(videoTapped);
+             this.share(videoTapped);
           }
         },{
           text: 'Cancel',
@@ -105,6 +106,21 @@ export class MediaCategoryPage {
     });
     actionSheet.present();
   }
+  share(elementToShare){
+    var options = {
+  message: 'Watch this video on Vimeo:', // not supported on some apps (Facebook, Instagram)
+  subject: elementToShare.name, // fi. for email
+  files: ['', ''], // an array of filenames either locally or remotely
+  url: elementToShare.link,
+  chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+}
+
+        SocialSharing.shareWithOptions(options).then(() => {
+    }).catch(() => {
+    });
+
+  }
+
 
   ionViewDidLoad() {
      setTimeout(() => {

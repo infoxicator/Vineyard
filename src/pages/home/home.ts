@@ -4,6 +4,7 @@ import {HomeService} from './home.service'
 import {TalksPage} from '../talks/talks'
 import {EventDetailPage} from '../event-detail/event-detail'
 import {PlayerModal} from '../modal/player-modal'
+import { SocialSharing } from 'ionic-native';
 //import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NavController, ModalController, ActionSheetController, LoadingController, ToastController } from 'ionic-angular';
@@ -85,6 +86,7 @@ export class HomePage {
           text: 'Share',
           icon: 'paper-plane',
           handler: () => {
+            this.share(videoTapped);
             //this.homeService.deleteFromWatchlaterList(videoTapped);
           }
         },{
@@ -98,6 +100,21 @@ export class HomePage {
     });
     actionSheet.present();
   }
+  share(elementToShare){
+    var options = {
+  message: 'Watch this video on Vimeo:', // not supported on some apps (Facebook, Instagram)
+  subject: elementToShare.name, // fi. for email
+  files: ['', ''], // an array of filenames either locally or remotely
+  url: elementToShare.link,
+  chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+}
+
+        SocialSharing.shareWithOptions(options).then(() => {
+    }).catch(() => {
+    });
+
+  }
+  
 }
      
 
