@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, ActionSheetController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ActionSheetController } from 'ionic-angular';
 import {HomeService} from '../home/home.service'
-import {MediaCategoryPage} from '../media-category/media-category'
+//import {MediaCategoryPage} from '../media-category/media-category'
 import {PlayerModal} from '../modal/player-modal'
 import {DomSanitizer} from '@angular/platform-browser';
 
@@ -23,7 +23,7 @@ export class WatchLaterPage {
 
     playVideo(event, videoel){
       videoel.embed.html = this.sanitizer.bypassSecurityTrustHtml(videoel.embed.html);
-    console.log(videoel);
+    //console.log(videoel);
    let playerModal = this.modalCtrl.create(PlayerModal, { videoel });
    playerModal.present();
   }
@@ -62,10 +62,6 @@ export class WatchLaterPage {
       ]
     });
     actionSheet.present();
-  }
-
-  ionViewDidLoad() {
-    console.log('Hello WatchLaterPage Page');
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'page-newspost',
@@ -12,11 +12,7 @@ export class NewspostPage {
  constructor(public navCtrl: NavController,  private navParams: NavParams, sanitizer: DomSanitizer) {
       this.newsPost = navParams.get('newsPost');
       this.newsPost.content.rendered = sanitizer.bypassSecurityTrustHtml(this.newsPost.content.rendered);
-      console.log(this.newsPost);
-  }
-
-  ionViewDidLoad() {
-    console.log('Hello NewspostPage Page');
+      //console.log(this.newsPost);
   }
 
 }

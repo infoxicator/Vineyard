@@ -1,5 +1,5 @@
 import { Component, ViewChild, Renderer } from '@angular/core';
-import { ModalController, NavController, NavParams, ViewController, ActionSheetController, LoadingController, Platform} from 'ionic-angular';
+import { NavParams, ViewController, ActionSheetController, LoadingController, Platform} from 'ionic-angular';
 import { HomeService } from '../home/home.service'
 import Player from '@vimeo/player';
 import { SocialSharing } from 'ionic-native';
@@ -34,7 +34,7 @@ export class PlayerModal {
     this.video = navParams.get('videoel');
     this.videoId = homeService.getVimeoId(this.video.link);
     this.currentVideo = this.video;
-    console.log('Video Object', navParams.get('videoel'));
+    //console.log('Video Object', navParams.get('videoel'));
     //console.log(this.el);
   }
   createLoader() {
@@ -90,8 +90,11 @@ export class PlayerModal {
   ionViewDidLoad() {
     //this.iframeElement = this.renderer.selectRootElement("iframe");
     //this.player = new Player(this.iframeElement);
-    this.player = new Player(this.div.nativeElement, {
-    id: this.videoId})
+
+   this.player = new Player(this.div.nativeElement, { id: this.videoId})
+
+  
+    
      if (this.plt.is('ios')) {
       // This will only print when on iOS, Hidding the auto play since apple doesnt support it without user interaction
       //console.log("I'm an iOS device!");

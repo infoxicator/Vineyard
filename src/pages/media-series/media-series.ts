@@ -27,9 +27,11 @@ export class MediaSeriesPage {
       homeService.getVideoAlbums()
       .subscribe(videoAlbums => {this.videoAlbums = videoAlbums;
          this.videosLoaded = true;
+         this.filterAlbums(this.videoAlbums);
         }, error =>{storage.get('videoAlbums').then((videoAlbums) => {
                         this.videosLoaded = true;
                          this.videoAlbums = videoAlbums;
+                         this.filterAlbums(this.videoAlbums);
                         })
         });      
       homeService.getVideoChannels()
@@ -71,7 +73,7 @@ export class MediaSeriesPage {
   }
     playVideo(event, videoel){
       videoel.embed.html = this.sanitizer.bypassSecurityTrustHtml(videoel.embed.html);
-    console.log(videoel);
+    //console.log(videoel);
    let playerModal = this.modalCtrl.create(PlayerModal, { videoel });
    playerModal.present();
   }
@@ -84,8 +86,12 @@ export class MediaSeriesPage {
         });         
   }
 
-  ionViewDidLoad() {
-    console.log('Hello MediaSeriesPage Page');
+  filterAlbums(albumsArray) {
+       for (let i = 0; i < albumsArray.length; i++){ //iterate images
+      if(albumsArray[i].name =="Private"){        
+        albumsArray.splice(i, 1);
+      }
+    };
   }
 
 }

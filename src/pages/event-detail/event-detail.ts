@@ -15,12 +15,7 @@ export class EventDetailPage {
   churchEvent:any;
  constructor(public navCtrl: NavController,  private navParams: NavParams) {
       this.churchEvent = navParams.get('churchEvent');
-      console.log(this.churchEvent);
-  }
-
-  ionViewDidLoad() {
-    console.log('Hello EventDetailPage Page');
-      
+      //console.log(this.churchEvent);
   }
 
 }

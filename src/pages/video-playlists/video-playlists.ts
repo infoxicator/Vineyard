@@ -15,16 +15,12 @@ grid: Array<Array<string>>;
   constructor(public navCtrl: NavController,  private navParams: NavParams,  private homeService:HomeService) {
       this.videoAlbums = navParams.get('videoAlbums');
       this.grid = homeService.createGrid(this.videoAlbums);
-      console.log(this.grid);
+      //console.log(this.grid);
   }
      categoryTapped(event, category){
     this.navCtrl.push(MediaCategoryPage, {
       category: category
     })
-  }
-
-  ionViewDidLoad() {
-    console.log('Hello VideoPlaylistsPage Page');
   }
 
 }

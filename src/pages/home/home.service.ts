@@ -86,8 +86,7 @@ export class HomeService {
   }
   saveToWatchLaterList(video) {
     if (this.getWatchLaterVideo(video.uri)){
-      console.log('already there' + this.getWatchLaterVideo(video.uri) )
-        //already there
+      //console.log('already there' + this.getWatchLaterVideo(video.uri) )
     }else{
       this.watchLaterVideos.push(video);
       this.storage.set('watchLaterArray', this.watchLaterVideos);

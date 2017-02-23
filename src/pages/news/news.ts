@@ -35,8 +35,4 @@ export class NewsPage {
    this.navCtrl.push(NewspostPage, {
       newsPost: newsPost})
       }
-  ionViewDidLoad() {
-    console.log('Hello NewsPage Page');
-  }
-
 }

@@ -16,9 +16,4 @@ export class ChurchPage {
  constructor(public navCtrl: NavController,  private navParams: NavParams) {
       this.churchPage = navParams.get('churchPage');
   }
-
-  ionViewDidLoad() {
-    console.log('Hello ChurchPage Page');
-  }
-
 }

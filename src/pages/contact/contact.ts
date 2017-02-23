@@ -57,7 +57,7 @@ export class ContactPage {
   loadGoogleMaps() {
     this.addConnectivityListeners();
     if (typeof google == "undefined" || typeof google.maps == "undefined") {
-      console.log("Google maps JavaScript needs to be loaded.");
+      //console.log("Google maps JavaScript needs to be loaded.");
       this.disableMap();
       if (this.connectivityService.isOnline()) {
         //console.log("online, loading map");
@@ -77,12 +77,12 @@ export class ContactPage {
       }
     } else {
       if (this.connectivityService.isOnline()) {
-        console.log("showing map");
+        //console.log("showing map");
         this.initMap();
         this.enableMap();
       }
       else {
-        console.log("disabling map");
+        //console.log("disabling map");
         this.disableMap();
       }
     }
@@ -101,10 +101,10 @@ export class ContactPage {
     this.addMarker();
   }
   disableMap() {
-    console.log("disable map");
+    //console.log("disable map");
   }
   enableMap() {
-    console.log("enable map");
+    //console.log("enable map");
   }
   addConnectivityListeners() {
     let onOnline = () => {

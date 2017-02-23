@@ -15,7 +15,6 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import {PostDetailPage} from '../pages/post-detail/post-detail'
 import {TalksPage} from '../pages/talks/talks'
 import { MediaSeriesPage } from '../pages/media-series/media-series';
 import { MediaCategoryPage } from '../pages/media-category/media-category';
@@ -35,7 +34,6 @@ import { WatchLaterPage } from '../pages/watch-later/watch-later'
     ContactPage,
     HomePage,
     TabsPage,
-    PostDetailPage,
     TalksPage,
     MediaSeriesPage,
     MediaCategoryPage,
@@ -75,7 +73,6 @@ tabsPlacement: 'bottom',
     ContactPage,
     HomePage,
     TabsPage,
-    PostDetailPage,
     TalksPage,
     MediaSeriesPage,
     EventDetailPage,
