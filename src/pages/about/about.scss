@@ -7,10 +7,10 @@ page-about {
     display: block;
     margin: auto;
   }
-ion-col{
+button[ion-col]{
   padding:1px;
 }
-ion-grid{
-  padding:1px;
+.grid{
+  padding:0px;
 }
 }

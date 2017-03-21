@@ -17,6 +17,7 @@ export class MediaCategoryPage {
   nextPageUri: any;
   loaded = false;
   sanitizer: any;
+   videosLoaded: boolean;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private homeService:HomeService, sanitizer: DomSanitizer,
    storage: Storage, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, private toastCtrl: ToastController) {
@@ -25,6 +26,7 @@ export class MediaCategoryPage {
       homeService.getVideosByCategory(this.category.uri)
       .then(videos => {
         this.videos = videos.data;
+        this.videosLoaded = true;
         this.videos.forEach(video => {
           video.embed.html = sanitizer.bypassSecurityTrustHtml(video.embed.html);
         });
@@ -32,6 +34,7 @@ export class MediaCategoryPage {
       }).catch(error => {
         storage.get('videosByCategory').then((videos) => {
         this.videos = videos.data;
+        this.videosLoaded = true;
         this.videos.forEach(video => {
           video.embed.html = sanitizer.bypassSecurityTrustHtml(video.embed.html);
         });

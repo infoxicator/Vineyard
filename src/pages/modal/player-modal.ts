@@ -2,7 +2,7 @@ import { Component, ViewChild, Renderer } from '@angular/core';
 import { NavParams, ViewController, ActionSheetController, LoadingController, Platform} from 'ionic-angular';
 import { HomeService } from '../home/home.service'
 import Player from '@vimeo/player';
-import { SocialSharing } from 'ionic-native';
+import { SocialSharing, StatusBar } from 'ionic-native';
 
 @Component({
   selector: 'page-player-modal',
@@ -25,6 +25,7 @@ export class PlayerModal {
 
   constructor(navParams: NavParams, public viewCtrl: ViewController, public renderer: Renderer, public homeService: HomeService,
     public actionSheetCtrl: ActionSheetController, public loadingCtrl: LoadingController, public plt: Platform) {
+      StatusBar.hide();// let status bar overlay webview
     this.homeService.getWatchLaterList()
       .then(watchLaterList => {
       this.watchLaterList = watchLaterList;
@@ -166,6 +167,7 @@ export class PlayerModal {
 
 
   dismiss() {
+    StatusBar.show();
     this.viewCtrl.dismiss();
   }
 

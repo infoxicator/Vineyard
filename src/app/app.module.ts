@@ -3,7 +3,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { SecToMinPipe } from './sectomin.pipe';
 import { ConnectivityService } from '../providers/connectivity-service';
-import { Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 //External libraries
 //import { Ng2MapModule} from 'ng2-map';
 import { ParallaxHeader } from '../components/parallax-header/parallax-header';
@@ -64,7 +64,7 @@ tabsPlacement: 'bottom',
     {
       tabsPlacement: 'top'
     }
-    }}), MomentModule//, Ng2MapModule
+    }}), IonicStorageModule.forRoot(), MomentModule//, Ng2MapModule
 ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -6,6 +6,7 @@
 </ion-header>
 <ion-content>
   <ion-list class="card-background-page">
+     <ion-spinner *ngIf="!videosLoaded"></ion-spinner>
     <ion-card ion-item *ngFor="let video of videos" >
             <ion-item>
               <ion-avatar item-left *ngIf="video?.user?.pictures?.sizes">

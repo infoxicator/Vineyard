@@ -137,6 +137,9 @@ share(elementToShare){
   });
 
 }
+ ionViewDidLoad() {
+    console.log('Hello TalksPage Page');
+  }
   
 }
      

@@ -11,14 +11,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content class="card-background-page">
-    <!--<ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-round-down"
       pullingText="Pull to refresh"
       refreshingSpinner="circles"
       refreshingText="Refreshing...">
     </ion-refresher-content>
-  </ion-refresher>-->
+  </ion-refresher>
       <ion-spinner *ngIf="!contentLoaded"></ion-spinner>
   <div [ngSwitch]="homeSegment">
 
