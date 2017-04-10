@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { SecToMinPipe } from './sectomin.pipe';
 import { ConnectivityService } from '../providers/connectivity-service';
 import { IonicStorageModule } from '@ionic/storage';
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 //External libraries
 //import { Ng2MapModule} from 'ng2-map';
 import { ParallaxHeader } from '../components/parallax-header/parallax-header';
@@ -26,6 +27,24 @@ import { PlayerModal } from '../pages/modal/player-modal'
 import { VideoPlaylistsPage } from '../pages/video-playlists/video-playlists'
 import { VideoChannelsPage } from '../pages/video-channels/video-channels'
 import { WatchLaterPage } from '../pages/watch-later/watch-later'
+
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': '095d2e31'
+  },
+  'push': {
+    'sender_id': '290756966930',
+    'pluginConfig': {
+      'ios': {
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#ff0000'
+      }
+    }
+  }
+};
 
 @NgModule({
   declarations: [
@@ -64,7 +83,9 @@ tabsPlacement: 'bottom',
     {
       tabsPlacement: 'top'
     }
-    }}), IonicStorageModule.forRoot(), MomentModule//, Ng2MapModule
+  }}), IonicStorageModule.forRoot(),
+   MomentModule,
+   CloudModule.forRoot(cloudSettings)//, Ng2MapModule
 ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -8,6 +8,7 @@ import { SocialSharing } from 'ionic-native';
 //import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { NavController, ModalController, ActionSheetController, LoadingController, ToastController } from 'ionic-angular';
+import { Push } from '@ionic/cloud-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 
 
@@ -24,9 +25,29 @@ export class HomePage {
   nextDay: Date;
   homeSegment = 'events';
   contentLoaded: boolean;
+  payload: any;
+  pushVideoId: number;
   constructor(public navCtrl: NavController, public homeService: HomeService,
     public loadingCtrl: LoadingController, storage: Storage, public modalCtrl: ModalController, public sanitizer: DomSanitizer,
-    public actionSheetCtrl: ActionSheetController, private toastCtrl: ToastController) {
+    public actionSheetCtrl: ActionSheetController, private toastCtrl: ToastController, public push: Push) {
+     this.push.rx.notification()
+      .subscribe((data) => {        
+        this.payload = data.payload;
+        if(this.payload){
+          if(this.payload.event){            
+            this.navCtrl.push(EventDetailPage, {
+              churchEvent: this.payload.event
+            })
+          }
+           if(this.payload.video){
+            //let playerModal = this.modalCtrl.create(PlayerModal);           
+             this.pushVideoId = this.payload.video;
+             //console.log(pushVideoId);
+             let playerModal = this.modalCtrl.create(PlayerModal, {pushVideoId: this.pushVideoId});
+             playerModal.present();
+          }
+        }  
+      });
     //this.loader.present();
     this.nextDay = new Date();
     homeService.getChurchEvents()
@@ -79,7 +100,7 @@ eventTapped(event, churchEvent){
 }
 playVideo(event, videoel){
   videoel.embed.html = this.sanitizer.bypassSecurityTrustHtml(videoel.embed.html);
-  //console.log(videoel);
+  //console.log(videoel);          
   let playerModal = this.modalCtrl.create(PlayerModal, { videoel });
   playerModal.present();
 }
@@ -136,11 +157,20 @@ share(elementToShare){
   }).catch(() => {
   });
 
-}
- ionViewDidLoad() {
-    console.log('Hello TalksPage Page');
+}  
+
+ionViewDidLoad() {
+   
+
+     /* var payload = {
+        video: 1234
+      }
+      this.pushVideoId = payload.video;
+             let playerModal = this.modalCtrl.create(PlayerModal, {videoel: this.pushVideoId});
+             playerModal.present();*/
+
   }
-  
+
 }
      
 

@@ -26,10 +26,17 @@ export class HomeService {
   }
   getChurchEvents() {
     // let churchEventsArray: any;
-    let url = `${this.baseurl}posts/?filter[category_name]=events`;
+    let url = `${this.baseurl}posts/?categories=4`;
     let request = this.http.get(url)
       .map(res => res.json())
       .mergeMap(res => this.storage.set('churchEvents', res));
+    return request;
+  }
+  getPost(postId: number) {
+    // let churchEventsArray: any;
+    let url = `${this.baseurl}posts/${postId}`;
+    let request = this.http.get(url)
+      .map(res => res.json())
     return request;
   }
   getLatestPosts() {
@@ -56,6 +63,13 @@ export class HomeService {
         return res.json();
       });
   }
+   getVideoById(videoId: number) {
+    return this.http.get(`${this.vimeourl}/videos/${videoId}?access_token=${this.vimeotoken}`)
+      .toPromise()
+      .then(res => {
+        return res.json();
+      });
+  }
   getMoreVideos(nextURI: string) {
     return this.http.get(`${this.vimeourl}/channels${nextURI}`)
       .toPromise()
@@ -76,8 +90,8 @@ export class HomeService {
       .map(res => res.json())
       .mergeMap(res => this.storage.set('newsCategory', res));
   }
-  getPostsByCategory(categoryName: string) {
-    return this.http.get(`${this.baseurl}posts/?filter[category_name]=${categoryName}`)
+  getPostsByCategory(categoryId: number) {
+    return this.http.get(`${this.baseurl}posts/?categories=${categoryId}`)
       .map(res => res.json())
       .mergeMap(res => this.storage.set('postsByCategory', res));
   }

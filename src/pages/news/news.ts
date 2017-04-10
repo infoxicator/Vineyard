@@ -22,7 +22,7 @@ export class NewsPage {
   constructor(public navCtrl: NavController,  private navParams: NavParams, private homeService:HomeService,
   storage: Storage) {
       this.newsCategory = navParams.get('newsCategory');
-       this.homeService.getPostsByCategory(this.newsCategory.name)
+       this.homeService.getPostsByCategory(this.newsCategory.id)
        .subscribe(news => {this.news = news;
          this.newsLoaded = true;
         }, error =>{storage.get('postsByCategory').then((news) => {

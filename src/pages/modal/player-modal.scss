@@ -13,6 +13,14 @@ ion-fab .fab[mini]{
     height: 25px;
     padding: 0; 
     box-shadow: none;
+    top:15px;
+    left:5px;
+}
+ion-fab[left] {
+    left: 0px !important;
+}
+ion-fab[top] {
+    top: 0px !important;
 }
 .player .controls-wrapper, .player .video-wrapper .sidedock{
 display:none !important;

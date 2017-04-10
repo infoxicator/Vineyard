@@ -21,6 +21,7 @@ export class PlayerModal {
   watchLaterList: any;
   watchLaterLoaded: boolean;
   player: any;
+  pushVideoId: number;
 //  public loader = this.loadingCtrl.create( {duration: 60000});
 
   constructor(navParams: NavParams, public viewCtrl: ViewController, public renderer: Renderer, public homeService: HomeService,
@@ -31,12 +32,14 @@ export class PlayerModal {
       this.watchLaterList = watchLaterList;
         this.watchLaterLoaded = true;
       });
-
     this.video = navParams.get('videoel');
-    this.videoId = homeService.getVimeoId(this.video.link);
-    this.currentVideo = this.video;
+    this.pushVideoId = navParams.get('pushVideoId');
+   if(this.video && this.video.link){
+      this.videoId = homeService.getVimeoId(this.video.link);
+      this.currentVideo = this.video;
+    }
     //console.log('Video Object', navParams.get('videoel'));
-    //console.log(this.el);
+
   }
   createLoader() {
   return this.loadingCtrl.create({
@@ -91,9 +94,26 @@ export class PlayerModal {
   ionViewDidLoad() {
     //this.iframeElement = this.renderer.selectRootElement("iframe");
     //this.player = new Player(this.iframeElement);
+    if (this.videoId){
+        this.player = new Player(this.div.nativeElement, { id: this.videoId})
+    }else{
+      
+      let loading = this.createLoader();
+      loading.present()
+      this.homeService.getVideoById(this.pushVideoId)
+      .then(video => {
+       this.currentVideo = video;
+       this.player = new Player(this.div.nativeElement, { id: this.pushVideoId})
+       loading.dismiss();  
+      }).catch(error => {
+        if(loading){
+          loading.dismiss();
+          this.viewCtrl.dismiss();
+        }
 
-   this.player = new Player(this.div.nativeElement, { id: this.videoId})
-
+        alert('Error Loading Video');                        
+      })
+    }
   
     
      if (this.plt.is('ios')) {

@@ -13,7 +13,7 @@
                 <img src="{{video?.user?.pictures?.sizes[2]?.link}}"> <!--safe navigator with index will be fixed on the next update of angular -->
            <div class="overlay"></div>
               </ion-avatar>
-                <h4>{{video?.name}}</h4>
+                <h4 tappable (click)="playVideo($event, video)">{{video?.name}}</h4>
             <p>{{video?.release_time | amTimeAgo}} - {{video?.stats?.plays}} plays</p>
                <button ion-button clear item-right (click)="presentActionSheet(video)"><ion-icon name="more"></ion-icon></button>
         </ion-item>

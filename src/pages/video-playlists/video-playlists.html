@@ -8,7 +8,7 @@
   <ion-grid>
     <ion-row *ngFor="let row of grid  let first = first; let last = last"
     [ngClass]="{ first: first, last: last }" >
-  <ion-col *ngFor="let album of row" (click)="categoryTapped($event, album)">
+  <ion-col tappable *ngFor="let album of row" (click)="categoryTapped($event, album)">
         <div *ngIf="album && album.pictures && album.pictures.sizes" class="thumbnail-wrapper">         
            <lazy-img src="{{album.pictures.sizes[2].link}}" *ngIf="album.pictures.sizes[2]"></lazy-img>
             <div class="overlay">
