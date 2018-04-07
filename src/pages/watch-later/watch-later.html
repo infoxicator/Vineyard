@@ -12,7 +12,7 @@
  <ion-list>
     <ion-item *ngFor="let video of watchLaterList" >
          <ion-thumbnail item-left (click)="playVideo($event, video)">
-       <lazy-img src={{video.pictures.sizes[1].link_with_play_button}}  *ngIf="video.pictures.sizes[1]"></lazy-img>
+     <op-lazy-img [source]='video.pictures.sizes[1].link_with_play_button'></op-lazy-img>
       <span>{{ video?.duration | SecToMin}}</span>
     </ion-thumbnail>   
       <h5 [innerHTML]="video?.name" (click)="playVideo($event, video)"></h5>

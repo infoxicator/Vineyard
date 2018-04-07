@@ -3,15 +3,14 @@ import { Storage } from '@ionic/storage';
 import { HomeService } from './home.service'
 import { TalksPage } from '../talks/talks'
 import { EventDetailPage } from '../event-detail/event-detail'
+import {ChurchPage} from '../church/church'
 import { PlayerModal } from '../modal/player-modal'
-import { SocialSharing } from 'ionic-native';
+import { SocialSharing } from '@ionic-native/social-sharing';
 //import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
-import { NavController, ModalController, ActionSheetController, LoadingController, ToastController } from 'ionic-angular';
-import { Push } from '@ionic/cloud-angular';
+import { Platform, NavController, ModalController, ActionSheetController, LoadingController, ToastController } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
-
-
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   selector: 'page-home',
@@ -27,27 +26,10 @@ export class HomePage {
   contentLoaded: boolean;
   payload: any;
   pushVideoId: number;
-  constructor(public navCtrl: NavController, public homeService: HomeService,
+  constructor(public platform: Platform, public navCtrl: NavController, public homeService: HomeService,
     public loadingCtrl: LoadingController, storage: Storage, public modalCtrl: ModalController, public sanitizer: DomSanitizer,
-    public actionSheetCtrl: ActionSheetController, private toastCtrl: ToastController, public push: Push) {
-     this.push.rx.notification()
-      .subscribe((data) => {        
-        this.payload = data.payload;
-        if(this.payload){
-          if(this.payload.event){            
-            this.navCtrl.push(EventDetailPage, {
-              churchEvent: this.payload.event
-            })
-          }
-           if(this.payload.video){
-            //let playerModal = this.modalCtrl.create(PlayerModal);           
-             this.pushVideoId = this.payload.video;
-             //console.log(pushVideoId);
-             let playerModal = this.modalCtrl.create(PlayerModal, {pushVideoId: this.pushVideoId});
-             playerModal.present();
-          }
-        }  
-      });
+    public actionSheetCtrl: ActionSheetController, private toastCtrl: ToastController, private socialSharing: SocialSharing,
+    private oneSignal: OneSignal) {
     //this.loader.present();
     this.nextDay = new Date();
     homeService.getChurchEvents()
@@ -153,38 +135,42 @@ share(elementToShare){
     chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
   }
 
-  SocialSharing.shareWithOptions(options).then(() => {
-  }).catch(() => {
+  this.socialSharing.shareWithOptions(options).catch(() => {
+    alert('Error sharing content, please try again');
   });
 
 }  
 
 ionViewDidLoad() {
-   
+  this.platform.ready().then(() => {
+  this.oneSignal.startInit('0f98c8b0-14a4-42b4-94bc-8806115cd92b', '290756966930');
 
-     /* var payload = {
-        video: 1234
-      }
-      this.pushVideoId = payload.video;
-             let playerModal = this.modalCtrl.create(PlayerModal, {videoel: this.pushVideoId});
-             playerModal.present();*/
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+      
+      this.oneSignal.handleNotificationOpened().subscribe((data) => {
+        if(data.notification.payload.additionalData.event){            
+          this.navCtrl.push(EventDetailPage, {
+            churchEvent: data.notification.payload.additionalData.event
+          })
+        }
+        if(data.notification.payload.additionalData.page){            
+          this.navCtrl.push(ChurchPage, {
+            churchPage: data.notification.payload.additionalData.page
+          })
+        }
+        if(data.notification.payload.additionalData.video){
+           let pushVideoId = data.notification.payload.additionalData.video;
+           let playerModal = this.modalCtrl.create(PlayerModal, {pushVideoId: pushVideoId});
+           playerModal.present();
+        }
+      });
+  
+      this.oneSignal.endInit();
 
-  }
+  })
+ }
 
 }
-     
-
- /* url: string = 'http://www.brightonvineyard.com/wp-json/wp/v2/posts';
-  items: any;
-  constructor(public navCtrl: NavController, private http: Http) {}
-  ionViewDidEnter(){
-    this.http.get(this.url)
-    .map(res => res.json())
-    .subscribe(data =>{
-      this.items = data;
-    });
-  }*/
-
 
 
 

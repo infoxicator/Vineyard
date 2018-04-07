@@ -46,12 +46,13 @@ ion-spinner {
         background-size: cover !important;
          background-repeat: no-repeat !important;
      }
-      .thumbnail-wrapper lazy-img{
-             position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+      .thumbnail-wrapper op-lazy-img img{
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0px;
      }
      .overlay_thumbnail_meta {
     z-index: 100;

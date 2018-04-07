@@ -2,7 +2,8 @@ import { Component, ViewChild, Renderer } from '@angular/core';
 import { NavParams, ViewController, ActionSheetController, LoadingController, Platform} from 'ionic-angular';
 import { HomeService } from '../home/home.service'
 import Player from '@vimeo/player';
-import { SocialSharing, StatusBar } from 'ionic-native';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
   selector: 'page-player-modal',
@@ -25,8 +26,9 @@ export class PlayerModal {
 //  public loader = this.loadingCtrl.create( {duration: 60000});
 
   constructor(navParams: NavParams, public viewCtrl: ViewController, public renderer: Renderer, public homeService: HomeService,
-    public actionSheetCtrl: ActionSheetController, public loadingCtrl: LoadingController, public plt: Platform) {
-      StatusBar.hide();// let status bar overlay webview
+    public actionSheetCtrl: ActionSheetController, public loadingCtrl: LoadingController, public plt: Platform, 
+    private statusBar: StatusBar, private socialSharing: SocialSharing) {
+      statusBar.hide();// let status bar overlay webview
     this.homeService.getWatchLaterList()
       .then(watchLaterList => {
       this.watchLaterList = watchLaterList;
@@ -87,8 +89,8 @@ export class PlayerModal {
       url: elementToShare.link,
       chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
     }
-    SocialSharing.shareWithOptions(options).then(() => {
-    }).catch(() => {
+    this.socialSharing.shareWithOptions(options).catch(() => {
+      alert('Error sharing content, please try again');
     });
   }
   ionViewDidLoad() {
@@ -184,10 +186,13 @@ export class PlayerModal {
     });
   }
 }
+backButtonAction(){
+  this.dismiss();
+}
 
 
   dismiss() {
-    StatusBar.show();
+    this.statusBar.show();
     this.viewCtrl.dismiss();
   }
 

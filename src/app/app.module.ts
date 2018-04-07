@@ -1,16 +1,16 @@
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { SecToMinPipe } from './sectomin.pipe';
-import { ConnectivityService } from '../providers/connectivity-service';
 import { IonicStorageModule } from '@ionic/storage';
-import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import { File } from '@ionic-native/file';
 //External libraries
-//import { Ng2MapModule} from 'ng2-map';
 import { ParallaxHeader } from '../components/parallax-header/parallax-header';
-import { ElasticHeader } from '../components/elastic-header/elastic-header';
 import {MomentModule} from 'angular2-moment';
-import { LazyImgComponent } from '../global/components/';
+
 //Pages Imports
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -27,25 +27,13 @@ import { PlayerModal } from '../pages/modal/player-modal'
 import { VideoPlaylistsPage } from '../pages/video-playlists/video-playlists'
 import { VideoChannelsPage } from '../pages/video-channels/video-channels'
 import { WatchLaterPage } from '../pages/watch-later/watch-later'
-
-const cloudSettings: CloudSettings = {
-  'core': {
-    'app_id': '095d2e31'
-  },
-  'push': {
-    'sender_id': '290756966930',
-    'pluginConfig': {
-      'ios': {
-        'badge': true,
-        'sound': true
-      },
-      'android': {
-        'iconColor': '#2196F3',
-        'icon' : 'icon'
-      }
-    }
-  }
-};
+import { HttpModule } from '@angular/http';
+import { NguiMapModule} from '@ngui/map';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { CacheImgModule } from '../global/img-cache';
+import { ImgCacheService } from '../global/img-cache';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @NgModule({
   declarations: [
@@ -65,8 +53,6 @@ const cloudSettings: CloudSettings = {
     VideoPlaylistsPage,
     VideoChannelsPage,
     WatchLaterPage,
-    ElasticHeader,
-    LazyImgComponent,
     SecToMinPipe,
     ParallaxHeader
   ],
@@ -85,8 +71,11 @@ tabsPlacement: 'bottom',
       tabsPlacement: 'top'
     }
   }}), IonicStorageModule.forRoot(),
+  BrowserModule,
+  HttpModule,
    MomentModule,
-   CloudModule.forRoot(cloudSettings)//, Ng2MapModule
+   NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyAREiBD0jH1edwsi-pRAnoytslyOAojRqY'}),
+   CacheImgModule.forRoot()
 ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -105,9 +94,17 @@ tabsPlacement: 'bottom',
     PlayerModal,
     VideoPlaylistsPage,
     VideoChannelsPage,
-    WatchLaterPage,
-    LazyImgComponent
+    WatchLaterPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, ConnectivityService, Storage]
+  providers: [
+    File,
+    StatusBar,
+    SplashScreen,
+    SocialSharing,
+    LaunchNavigator,
+    ImgCacheService,
+    OneSignal,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
 })
 export class AppModule {}

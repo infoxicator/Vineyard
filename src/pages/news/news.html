@@ -12,7 +12,7 @@
 <ion-list>    
 <ion-card tappable *ngFor="let newsPost of news" class="thumbnail-wrapper" (click)="postTapped($event, newsPost)">
   <!--[ngStyle]="{'background': 'url('+churchEvent.better_featured_image.source_url+')'}"> -->
-    <lazy-img src={{newsPost?.better_featured_image?.source_url}}></lazy-img>
+  <op-lazy-img [source]='newsPost?.better_featured_image?.source_url'></op-lazy-img>
                     <div class="overlay_thumbnail_meta">
                       <span [innerHTML]="newsPost?.title?.rendered"></span>
                     </div> 

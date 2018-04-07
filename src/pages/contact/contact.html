@@ -50,6 +50,10 @@
   </a>
       <ion-item-divider color="light"></ion-item-divider>
   </ion-list>
-  <div #map id="map"></div>
+  <ngui-map center="50.8341173, -0.1513398" zoom="15"><marker position="50.8341173, -0.1513398" (click)="showInfoWindow($event)"></marker>
+    <info-window id="iw">
+      <h5>Doing church 10:30 am sundays...</h5><p>BHASVIC College</p>
+    </info-window>
+  </ngui-map>
 
 </ion-content>

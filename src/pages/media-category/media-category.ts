@@ -4,7 +4,7 @@ import { ModalController, NavController, NavParams, ActionSheetController, Toast
 import {HomeService} from '../home/home.service'
 import {PlayerModal} from '../modal/player-modal'
 import { DomSanitizer} from '@angular/platform-browser';
-import { SocialSharing } from 'ionic-native';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'page-media-category',
@@ -20,7 +20,7 @@ export class MediaCategoryPage {
    videosLoaded: boolean;
 
   constructor(public navCtrl: NavController, private navParams: NavParams, private homeService:HomeService, sanitizer: DomSanitizer,
-   storage: Storage, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, private toastCtrl: ToastController) {
+   storage: Storage, public modalCtrl: ModalController, public actionSheetCtrl: ActionSheetController, private toastCtrl: ToastController, private socialSharing: SocialSharing) {
      this.sanitizer = sanitizer;
       this.category = navParams.get('category');
       homeService.getVideosByCategory(this.category.uri)
@@ -109,8 +109,8 @@ export class MediaCategoryPage {
   chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
 }
 
-        SocialSharing.shareWithOptions(options).then(() => {
-    }).catch(() => {
+    this.socialSharing.shareWithOptions(options).catch(() => {
+      alert('Error sharing content, please try again');
     });
 
   }

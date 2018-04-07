@@ -77,6 +77,10 @@ export class HomeService {
   }
   getPage(pageId: number) {
     return this.http.get(`${this.baseurl}pages/${pageId}`)
+      .map(res => res.json());
+  }
+  getSliderPage(pageId: number) {
+    return this.http.get(`${this.baseurl}pages/${pageId}`)
       .map(this.convertPage)
       .mergeMap(res => this.storage.set('page', res));
   }

@@ -10,7 +10,7 @@
     <ion-card ion-item *ngFor="let video of videos" >
             <ion-item>
               <ion-avatar item-left *ngIf="video?.user?.pictures?.sizes">
-                <img src="{{video?.user?.pictures?.sizes[2]?.link}}"> <!--safe navigator with index will be fixed on the next update of angular -->
+                <img src="{{video?.user?.pictures?.sizes[2]?.link}}"> 
            <div class="overlay"></div>
               </ion-avatar>
                 <h4 tappable (click)="playVideo($event, video)">{{video?.name}}</h4>
@@ -19,7 +19,7 @@
         </ion-item>
          <!--<div [innerHTML]="video?.embed.html" class="video-container"></div> -->
      <div class="video-picture" *ngIf="video?.pictures?.sizes">
-         <lazy-img src={{video?.pictures?.sizes[3]?.link_with_play_button}} (click)="playVideo($event, video)"></lazy-img>
+     <op-lazy-img [source]='video?.pictures?.sizes[3]?.link_with_play_button' (click)="playVideo($event, video)"></op-lazy-img>
            <span>{{ video?.duration | SecToMin}}</span>
      </div>
     </ion-card>

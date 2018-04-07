@@ -26,7 +26,7 @@
       
 <ion-card  *ngFor="let churchEvent of churchEvents" class="thumbnail-wrapper" (click)="eventTapped($event, churchEvent)"  >
   <!--[ngStyle]="{'background': 'url('+churchEvent.better_featured_image.source_url+')'}"> -->
-    <lazy-img src={{churchEvent?.better_featured_image?.source_url}}></lazy-img>
+   <op-lazy-img [source]='churchEvent?.better_featured_image?.source_url'></op-lazy-img>
                     <div class="overlay_thumbnail_meta">
                       <span [innerHTML]="churchEvent?.title?.rendered"></span>
                       <!--<span class="meta">{{album.metadata.connections.videos.total}} Videos / {{ album.duration | SecToMin}}</span>-->
@@ -36,7 +36,7 @@
     <ion-list *ngSwitchCase="'media'">
     <ion-item *ngFor="let video of latestPosts" >
          <ion-thumbnail item-left (click)="playVideo($event, video)">
-       <lazy-img src={{video?.pictures?.sizes[1]?.link_with_play_button}}></lazy-img>
+      <op-lazy-img [source]='video?.pictures?.sizes[1]?.link_with_play_button'></op-lazy-img>
       <span>{{ video?.duration | SecToMin}}</span>
     </ion-thumbnail>   
       <h5 [innerHTML]="video?.name" (click)="playVideo($event, video)"></h5>

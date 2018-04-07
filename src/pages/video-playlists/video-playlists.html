@@ -10,7 +10,7 @@
     [ngClass]="{ first: first, last: last }" >
   <ion-col tappable *ngFor="let album of row" (click)="categoryTapped($event, album)">
         <div *ngIf="album && album.pictures && album.pictures.sizes" class="thumbnail-wrapper">         
-           <lazy-img src="{{album.pictures.sizes[2].link}}" *ngIf="album.pictures.sizes[2]"></lazy-img>
+           <op-lazy-img [source]='album?.pictures?.sizes[2]?.link'></op-lazy-img>
             <div class="overlay">
                     <div class="overlay_thumbnail_meta">
                       <span class="banner">{{album?.name}}</span>

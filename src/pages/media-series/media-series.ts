@@ -28,6 +28,7 @@ export class MediaSeriesPage {
       .subscribe(videoAlbums => {this.videoAlbums = videoAlbums;
          this.videosLoaded = true;
          this.filterAlbums(this.videoAlbums);
+         //console.log(this.videoAlbums);
         }, error =>{storage.get('videoAlbums').then((videoAlbums) => {
                         this.videosLoaded = true;
                          this.videoAlbums = videoAlbums;
@@ -80,6 +81,7 @@ export class MediaSeriesPage {
 
 
   ionViewWillEnter(){
+    console.log('media');
     this.homeService.getWatchLaterList()
          .then(watchLaterList => {this.watchLaterList = watchLaterList;
          this.watchLaterLoaded = true;

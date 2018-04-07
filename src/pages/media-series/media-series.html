@@ -10,8 +10,8 @@
      <ion-grid>
      <ion-row nowrap>
      <ion-col col-9 tappable *ngFor="let album of videoAlbums" (click)="categoryTapped($event, album)">
-           <div *ngIf="album.pictures && album.pictures.sizes" class="thumbnail-wrapper">
-             <lazy-img src="{{album.pictures.sizes[2].link}}" *ngIf="album.pictures.sizes[2]"></lazy-img>
+           <div *ngIf="album?.pictures && album?.pictures?.sizes" class="thumbnail-wrapper">
+             <op-lazy-img [source]='album?.pictures?.sizes[2]?.link'></op-lazy-img>
                 <div class="overlay">
                     <div class="overlay_thumbnail_meta">
                       <span class="banner">{{album.name}}</span>
@@ -30,11 +30,11 @@
      <ion-grid>
      <ion-row nowrap>
      <ion-col tappable col-9 *ngFor="let channel of videoChannels" (click)="categoryTapped($event, channel)">
-        <div *ngIf="channel.pictures && channel.pictures.sizes" class="thumbnail-wrapper">
-            <lazy-img src="{{channel.pictures.sizes[2].link}}" *ngIf="channel.pictures.sizes[2]"></lazy-img>
+        <div *ngIf="channel?.pictures && channel?.pictures?.sizes" class="thumbnail-wrapper">
+           <op-lazy-img [source]='channel?.pictures?.sizes[2]?.link'></op-lazy-img>
            <div class="overlay">
               <div class="overlay_thumbnail_meta">
-                <span class="banner">{{channel.name}}</span>
+                <span class="banner">{{channel?.name}}</span>
               </div>
            </div>
         </div>   
@@ -51,7 +51,7 @@
      <ion-row nowrap>
      <ion-col tappable col-9 *ngFor="let video of watchLaterList" (click)="playVideo($event, video)">
         <div *ngIf="video.pictures && video.pictures.sizes" class="thumbnail-wrapper">
-            <lazy-img src="{{video.pictures.sizes[2].link}}"  *ngIf="video.pictures.sizes[2]"></lazy-img>
+           <op-lazy-img [source]='video?.pictures?.sizes[2]?.link'></op-lazy-img>
            <div class="overlay">
               <div class="overlay_thumbnail_meta">
                 <span class="banner">{{video.name}}</span>
